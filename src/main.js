@@ -8,7 +8,7 @@ import materializeJs from '../js/materialize.min.js'
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
+/* eslint-disable */
 new Vue({
   el: '#app',
   router,
