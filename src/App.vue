@@ -6,6 +6,7 @@
 </template>
 
 <script>
+// import FoodElection from '@/components/FoodElection';
 export default {
   name: 'App',
 };

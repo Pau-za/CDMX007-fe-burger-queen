@@ -40,7 +40,7 @@
         <h6 id="kind-of-menu">{{ costo }}</h6>
       </div>
 
-      <div id="single-burgers" class="meals-selected">
+      <!-- <div id="single-burgers" class="meals-selected">
         <div class="menu-display-space">
           <button class="single option-meal" id="single-beef-burger">
             <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
@@ -70,14 +70,14 @@
             <h5>Doble Vegetariana</h5>
           </button>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "GeneralMenu",
+  name: "Breakfast",
   data() {
     return {
       kindOfMenu: "Comida",
@@ -139,8 +139,8 @@ h3 {
 .picked-items {
   width: 36%;
   background-color: #38404a;
-  margin: 5.3% -2% 0% 0%;
-  padding: 3% 0% 51% 0%;
+  margin: 5.3% 0% 0% 0%;
+  padding: 3% 0% 57% 0%;
   border-left: 4px solid white;
 }
 
@@ -178,7 +178,7 @@ h3 {
 }
 
 .menu-display-space {
-  margin-left: 0%;
+  margin-left: -6%;
 }
 
 #sm-burger-logo {
