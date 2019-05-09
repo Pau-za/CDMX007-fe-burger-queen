@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "FoodElection"
+  name: "FoodElection",
   //   data() {
 
   //   }
