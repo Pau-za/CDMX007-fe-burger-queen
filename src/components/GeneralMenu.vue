@@ -32,9 +32,27 @@
       >
       <img class="ticket-icons" src="../assets/logout/logout_sm.png" alt="logout-icon">
     </div>
+
     <div class="sell-info">
-      <h5 id="kind-of-menu">{{ item }}</h5>
-      <h5 id="kind-of-menu">{{ costo }}</h5>
+      <div class="picked-items">
+        <h6 id="kind-of-menu">{{ item }}</h6>
+        <h6 id="kind-of-menu">{{ costo }}</h6>
+      </div>
+
+      <div id="meals-selected" class="menu-display-space">
+        <button class="single" id="single-beef-burger">
+          <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+          <h5>Sencilla Res</h5>
+        </button>
+        <button class="single" id="single-chicken-burger">
+          <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+          <h5>Sencilla Pollo</h5>
+        </button>
+        <button class="single" id="single-vegan-burger">
+          <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+          <h5>Sencilla Vegetariana</h5>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -53,8 +71,9 @@ export default {
 </script>
 
 <style scoped>
-h5 {
+h5, h6 {
   display: -webkit-inline-box;
+  font-weight: 700;
 }
 
 h3 {
@@ -80,6 +99,7 @@ h3 {
   display: -webkit-inline-box;
   margin: 0% 6% 0% 0%;
   width: 137%;
+  border-bottom: 3px solid black;
 }
 
 .menu-options {
@@ -88,15 +108,41 @@ h3 {
 }
 
 .sell-info {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+
+  width: 100%;
+}
+
+.picked-items {
   width: 36%;
   background-color: #38404a;
-  margin: 5% 0% 0% 64%;
-  padding: 3% 0% 51% 0%;
+  margin: 5.3% 0% 0% 0%;
+  padding: 3% 0% 52% 0%;
+  border-left: 4px solid white;
 }
 
 .ticket-icons {
   margin: 0% 10%;
   width: 10%;
+}
+
+#meals-selected {
+  justify-content: space-evenly;
+  display: inline-flex;
+  background-color: #242e3a;
+  margin: 5.3% 0% 0% 0%;
+  width: 64%;
+  padding-bottom: 27%;
+}
+
+.single {
+  height: 34%;
+  background-color: #eab126;
+  border-radius: 10%;
+  border: none;
+  margin: 2%;
 }
 
 #sm-burger-logo {
