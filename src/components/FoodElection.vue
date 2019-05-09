@@ -27,7 +27,7 @@ h4 {
 .food-election {
   background-color: #242e3a;
   margin: -6% -1%;
-  padding: 21% 37%;
+  padding: 28% 37%;
   display: inline-flex;
   align-items: baseline;
 }

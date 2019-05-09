@@ -1,6 +1,6 @@
 <template>
   <div class="general-menu">
-      <div id="top-menu"></div>
+    <div id="top-menu">#</div>
     <div class="upper-menu">
       <div class="menu-name">
         <img
@@ -8,7 +8,7 @@
           src="../assets/logo_burquerqueen/logo_burguer_sm.png"
           alt="logo-burgerqueen"
         >
-        <h5 id="kind-of-menu">{{ kindOfMenu }}</h5>
+        <h4 id="kind-of-menu">{{ kindOfMenu }}</h4>
       </div>
       <div class="menu-number">
         <h3>1</h3>
@@ -39,20 +39,37 @@
         <h6 id="kind-of-menu">{{ costo }}</h6>
       </div>
 
-      <div id="meals-selected" class="menu-display-space">
-        <button class="single" id="single-beef-burger">
-          <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-          <h5>Sencilla Res</h5>
-        </button>
-        <button class="single" id="single-chicken-burger">
-          <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-          <h5>Sencilla Pollo</h5>
-        </button>
-        <button class="single" id="single-vegan-burger">
-          <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-          <h5>Sencilla Vegetariana</h5>
-        </button>
-      </div>
+      <dir id="single-burgers" class="meals-selected">
+        <div class="menu-display-space">
+          <button class="single option-meal" id="single-beef-burger">
+            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+            <h5>Sencilla Res</h5>
+          </button>
+          <button class="single option-meal" id="single-chicken-burger">
+            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+            <h5>Sencilla Pollo</h5>
+          </button>
+          <button class="single option-meal" id="single-vegan-burger">
+            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+            <h5>Sencilla Vegetariana</h5>
+          </button>
+        </div>
+
+        <div id="double-burgers" class="menu-display-space">
+          <button class="double option-meal" id="double-beef-burger">
+            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+            <h5>Doble Res</h5>
+          </button>
+          <button class="double option-meal" id="double-chicken-burger">
+            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+            <h5>Doble Pollo</h5>
+          </button>
+          <button class="double option-meal" id="double-vegan-burger">
+            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+            <h5>Doble Vegetariana</h5>
+          </button>
+        </div>
+      </dir>
     </div>
   </div>
 </template>
@@ -71,29 +88,31 @@ export default {
 </script>
 
 <style scoped>
-h5, h6 {
+h4,
+h5,
+h6 {
   display: -webkit-inline-box;
   font-weight: 700;
+  margin-top: 0%;
 }
 
 h3 {
-  margin: 0% 1.5%;
+  margin: 0% 2%;
   font-weight: 700;
 }
+
 .general-menu {
-  /* background-color: #242e3a; */
-  color: rgb(251, 252, 253);
-  height: 0%;
-  width: 102%;
+  background-color: #242e3a;
+  width: 100%;
 }
 
 .upper-menu {
   background-color: #38404a;
+  color: rgb(251, 252, 253);
+  height: 0%;
+  width: 102%;
+  margin-top: 0%;
 }
-
-/* .menu-name {
-  display:con;
-} */
 
 .menu-number {
   background-color: #242e3a;
@@ -112,15 +131,15 @@ h3 {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
-
-  width: 100%;
+  color: white;
+  width: 102%;
 }
 
 .picked-items {
   width: 36%;
   background-color: #38404a;
   margin: 5.3% 0% 0% 0%;
-  padding: 3% 0% 52% 0%;
+  padding: 3% 0% 57% 0%;
   border-left: 4px solid white;
 }
 
@@ -129,42 +148,55 @@ h3 {
   width: 10%;
 }
 
-#meals-selected {
-  justify-content: space-evenly;
-  display: inline-flex;
+.meals-selected {
   background-color: #242e3a;
   margin: 5.3% 0% 0% 0%;
   width: 64%;
   padding-bottom: 27%;
 }
 
+.option-meal {
+  justify-content: space-evenly;
+  display: inline-flex;
+  border-radius: 10%;
+  border: none;
+}
+
 .single {
   height: 34%;
   background-color: #eab126;
-  border-radius: 10%;
-  border: none;
   margin: 2%;
+  width: 28%;
+}
+
+.double {
+  height: 34%;
+  background-color: #FF6A5C;
+  margin: 2%;
+  width: 28%;
+}
+
+.menu-display-space {
+  margin-left: -6%;
 }
 
 #sm-burger-logo {
-  margin: 1% 0% -2% -8%;
+  margin: 1% 0% -2% -55%;
   width: 7%;
 }
 
 #kind-of-menu {
-  margin: -2% 14% 2% 12%;
+  margin: -2% 14% 2% 5%;
 }
 
 #top-menu {
-  height: 0%;
   background-color: #242e3a;
-  height: auto;
+  color: #242e3a;
+  margin-top: -6%;
+  width: 102%;
+  padding: 1% 0%;
 }
 
-/* body{
-  background-color: #242e3a;
-  width: 100%;
-  height: auto;
-} */
+
 </style>
 
