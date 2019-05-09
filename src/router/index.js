@@ -11,23 +11,23 @@ Vue.use(Router);
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'FoodElection',
-    //   component: FoodElection,
-    // },
     {
       path: '/',
+      name: 'FoodElection',
+      component: FoodElection,
+    },
+    {
+      path: '/GeneralMenu',
       name: 'GeneralMenu',
       component: GeneralMenu,
     },
     {
-      path: '/',
+      path: '/SellInformation',
       name: 'SellInformation',
       component: SellInformation,
     },
     {
-      path: '/',
+      path: '/MealsFood',
       name: 'MealsFood',
       component: MealsFood,
     },

@@ -1,7 +1,7 @@
 <template>
   <div class="general-menu">
-    <div class="upper-menu">
       <div id="top-menu"></div>
+    <div class="upper-menu">
       <div class="menu-name">
         <img
           id="sm-burger-logo"
@@ -84,6 +84,7 @@ h3 {
   /* background-color: #242e3a; */
   color: rgb(251, 252, 253);
   height: 0%;
+  width: 102%;
 }
 
 .upper-menu {
@@ -97,8 +98,8 @@ h3 {
 .menu-number {
   background-color: #242e3a;
   display: -webkit-inline-box;
-  margin: 0% 6% 0% 0%;
-  width: 137%;
+  margin: 0% 0% 0% 0%;
+  width: 100%;
   border-bottom: 3px solid black;
 }
 
@@ -157,6 +158,13 @@ h3 {
 #top-menu {
   height: 0%;
   background-color: #242e3a;
+  height: auto;
 }
+
+/* body{
+  background-color: #242e3a;
+  width: 100%;
+  height: auto;
+} */
 </style>
 

@@ -6,7 +6,7 @@
     </div>
     <div class="food-type col l4 m4 s12 offset-m4" id="meal">
       <img src="../assets/meals_copy.png" alt="meals-image">
-      <h4>Comidas</h4>
+      <h4><router-link to="/GeneralMenu"> Comidas </router-link> </h4>
     </div>
   </div>
 </template>
