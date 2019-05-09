@@ -1,5 +1,7 @@
 <template>
-  <div class="sell-info"></div>
+  <div class="sell-info">
+    
+  </div>
 </template>
 
 <script>
