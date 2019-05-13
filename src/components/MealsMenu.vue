@@ -54,6 +54,58 @@
               <p>Doble Veggie</p>
             </button>
           </div>
+
+          <div class="beverages">
+            <button class="option-meal color-green">
+              <img src="../assets/water/water_bottle_sm.png" alt="agua">
+              <p>Agua</p>
+            </button>
+            <button class="option-meal color-green">
+              <img src="../assets/soda/soda_sm.png" alt="refresco">
+              <p>Refresco</p>
+            </button>
+          </div>
+
+          <div class="garrison">
+            <button class="option-meal color-pink">
+              <img src="../assets/fries/fries_sm.png" alt ="papas">
+              <p>Papas fritas</p>
+            </button>
+            <button class="option-meal color-pink">
+              <img src="../assets/onion_rings/onion_rings_sm.png" alt="aros-de-cebolla">
+              <p>Aros de cebolla</p>
+            </button>
+          </div>
+
+          <div class="extras">
+            <button class="option-meal color-yellow">
+              <img src="../assets/cheese/cheese_sm.png" alt="queso">
+              <p>Queso</p>
+            </button>
+            <button class="option-meal color-yellow">
+              <img src="../assets/egg/egg_sm.png" alt="huevo">
+              <p>Huevo</p>
+            </button>
+          </div>
+
+          <div class="no-ingredients">
+            <button class="option-meal color-white-yellow">
+              <img src="../assets/onion/onion_sm.png" alt="cebolla">
+              <p>Cebolla</p>
+            </button>
+            <button class="option-meal color-white-yellow">
+              <img src="../assets/lettuce/lettuce_sm.png" alt="lechuga">
+              <p>Lechuga</p>
+            </button>
+            <button class="option-meal color-white-yellow">
+              <img src="../assets/tomato/tomato_sm.png" alt="jitomate">
+              <p>Jitomate</p>
+            </button>
+            <button class="option-meal color-white-yellow">
+              <img src="../assets/pickles/pickles_sm.png" alt="pepinillos">
+              <p>Pepinillos</p>
+            </button>
+          </div>
         </div>
       </div>
       <div class="extra-options">
@@ -224,8 +276,8 @@ h3 {
   background-color: #eddd4c;
 }
 
-.color-yellow {
-  background-color: #c0da7a;
+.color-white-yellow {
+  background-color: #dad87a;
 }
 
 .text-size {
