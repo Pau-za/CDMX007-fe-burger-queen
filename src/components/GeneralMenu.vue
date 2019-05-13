@@ -158,23 +158,23 @@ h3 {
 
 .option-meal {
   justify-content: space-evenly;
-  display: inline-flex;
+  /* display: inline-flex; */
   border-radius: 10%;
   border: none;
+   margin: 2%;
+  width: 22%;
 }
 
 .single {
   height: 34%;
   background-color: #eab126;
-  margin: 2%;
-  width: 28%;
+ 
 }
 
 .double {
   height: 34%;
   background-color: #ff6a5c;
-  margin: 2%;
-  width: 28%;
+ 
 }
 
 .menu-display-space {
