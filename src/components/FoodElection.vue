@@ -1,11 +1,11 @@
 <template>
   <div class="food-election">
     <div class="col l4 m4 s12 offset-m4 food-type" id="breakfast">
-      <img src="../assets/breakfast_copy.png" alt="breakfast-image">
+      <img src="../assets/breakfast/breakfast-icon-xxxl.png" alt="breakfast-image">
       <h4><router-link to="/BreakfastMenu"> Desayunos </router-link> </h4>
     </div>
     <div class="food-type col l4 m4 s12 offset-m4" id="meal">
-      <img src="../assets/meals_copy.png" alt="meals-image">
+      <img src="../assets/meals/meals-icon-xxxl.png" alt="meals-image">
       <h4><router-link to="/MealsMenu"> Comidas </router-link> </h4>
     </div>
   </div>
