@@ -9,20 +9,15 @@
       <input type="text" id="date" v-model="tickets.date">
       <button @click="saveDataOrder">Ordenar</button>
     </div>
-    <!-- <h3>Lista de productos</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>-->
+    <h3>Lista de productos</h3>
+
+    <div id="single-burgers" class="menu-display-space" v-for="item in mealsFood" v-bind:key="item.id">
+      <button class="single option-meal" id="single-beef-burger">
+        <img :src="item.file" alt srcset>
+        <h6>{{ item.name }}</h6>
+      </button>
+    </div>
+
   </div>
 </template>
 
@@ -32,7 +27,7 @@ export default {
   name: "GeneralMenu",
   data() {
     return {
-      products: {},
+      mealsFood: [],
       // product:{
       //   name: null,
       //   price: null
@@ -68,11 +63,19 @@ export default {
     reset() {
       Object.assign(this.$data, this.$options.data.apply(this));
     }
+  },
+  created() {
+    db.collection("mealsFoos")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          // doc.data() is never undefined for query doc snapshots
+          this.mealsFood.push(doc.data());
+          console.log(this.mealsFood);
+        });
+      });
   }
 };
-// created(){
-
-// }
 </script>
 
 <style scoped>
