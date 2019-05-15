@@ -1,91 +1,78 @@
 <template>
   <div class="general-menu">
-    <div id="top-menu">#</div>
-    <div class="upper-menu">
-      <div class="menu-name">
-        <img
-          id="sm-burger-logo"
-          src="../assets/logo_burquerqueen/logo_burguer_sm.png"
-          alt="logo-burgerqueen"
-        >
-        <h4 id="kind-of-menu">{{ kindOfMenu }}</h4>
-      </div>
-      <div class="menu-number">
-        <h3>1</h3>
-        <h3>2</h3>
-        <h3>3</h3>
-        <h3>4</h3>
-        <h3>5</h3>
-        <h3>6</h3>
-        <h3>7</h3>
-        <h3>8</h3>
-        <h3>9</h3>
-        <h3>0</h3>
-        <h3 id="order-title">ORDEN</h3>
-      </div>
+    <div class="update">
+      <h4>Ingresa tu orden</h4>
+      <input type="text" id="hamburguesa" v-model="tickets.order">
+      <h4>Ingresa tu nombre</h4>
+      <input type="text" id="clientName" v-model="tickets.clientName">
+      <h4>Ingresa fecha</h4>
+      <input type="text" id="date" v-model="tickets.date">
+      <button @click="saveDataOrder">Ordenar</button>
     </div>
-    <div class="menu-options">
-      <img class="ticket-icons" src="../assets/menu_icons/menu_icon_sm.png" alt="menu-icon">
-      <img
-        class="ticket-icons"
-        src="../assets/menu_icons/configuracion.png"
-        alt="configuration-icon"
-      >
-      <img class="ticket-icons" src="../assets/logout/logout_sm.png" alt="logout-icon">
-    </div>
-
-    <div class="sell-info">
-      <div class="picked-items">
-        <h6 id="kind-of-menu">{{ item }}</h6>
-        <h6 id="kind-of-menu">{{ costo }}</h6>
-      </div>
-
-      <div id="single-burgers" class="meals-selected">
-        <div class="menu-display-space">
-          <button class="single option-meal" id="single-beef-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Sencilla Res</h5>
-          </button>
-          <button class="single option-meal" id="single-chicken-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Sencilla Pollo</h5>
-          </button>
-          <button class="single option-meal" id="single-vegan-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Sencilla Vegetariana</h5>
-          </button>
-        </div>
-
-        <div id="double-burgers" class="menu-display-space">
-          <button class="double option-meal" id="double-beef-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Doble Res</h5>
-          </button>
-          <button class="double option-meal" id="double-chicken-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Doble Pollo</h5>
-          </button>
-          <button class="double option-meal" id="double-vegan-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Doble Vegetariana</h5>
-          </button>
-        </div>
-      </div>
-    </div>
+    <!-- <h3>Lista de productos</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>-->
   </div>
 </template>
 
 <script>
+import { fb, db } from "../js/firebase";
 export default {
   name: "GeneralMenu",
   data() {
     return {
-      kindOfMenu: "Comida",
-      item: "Producto",
-      costo: "Costo"
+      products: {},
+      // product:{
+      //   name: null,
+      //   price: null
+      // },
+      tickets: {
+        clientName: null,
+        order: null,
+        date: null
+      }
     };
+  },
+  // firestore() {
+  //   return {
+  //     // Collection
+  //     // food: fs.collection("food"),
+  //     // // Doc
+  //     // ford: fs.collection("cars").doc("ford")
+  //   };
+  // },
+  methods: {
+    saveDataOrder() {
+      db.collection("tickets")
+        .add(this.tickets)
+        .then(docRef => {
+          console.log("Document written with ID: ", docRef.id);
+          this.reset();
+        })
+        .catch(function(error) {
+          console.error("Error adding document: ", error);
+        });
+      // test.firestore.js;
+    },
+    reset() {
+      Object.assign(this.$data, this.$options.data.apply(this));
+    }
   }
 };
+// created(){
+
+// }
 </script>
 
 <style scoped>
@@ -100,6 +87,12 @@ h6 {
 h3 {
   margin: 0% 2%;
   font-weight: 700;
+}
+
+.update {
+  width: 50%;
+  background-color: #ff6a5c;
+  color: aliceblue;
 }
 
 .general-menu {
@@ -161,20 +154,18 @@ h3 {
   /* display: inline-flex; */
   border-radius: 10%;
   border: none;
-   margin: 2%;
+  margin: 2%;
   width: 22%;
 }
 
 .single {
   height: 34%;
   background-color: #eab126;
- 
 }
 
 .double {
   height: 34%;
   background-color: #ff6a5c;
- 
 }
 
 .menu-display-space {

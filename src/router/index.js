@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import FoodElection from '@/components/FoodElection';
 import MealsMenu from '@/components/MealsMenu';
 import BreakfastMenu from '@/components/BreakfastMenu';
+import GeneralMenu from '@/components/GeneralMenu';
 
 /* eslint-disable */
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/breakfastMenu',
       name: 'BreakfastMenu',
       component: BreakfastMenu,
+    },
+    {
+      path: '/pruebaFirebase',
+      name: 'GeneralMenu',
+      component: GeneralMenu,
     },
   ],
 });
