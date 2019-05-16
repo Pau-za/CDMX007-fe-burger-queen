@@ -26,15 +26,15 @@
       <div class="options-items-food">
         <div class="meals-selected">
           <div id="single-burgers" class="menu-display-space">
-            <button class="single option-meal" id="single-beef-burger">
+            <button class="single option-meal" id="ml-sh-single-beef" name="Sencilla Res" @click="clickedButton">
               <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
               <p>Sencilla Res</p>
             </button>
-            <button class="single option-meal" id="single-chicken-burger">
+            <button class="single option-meal" id="ml-sh-single-chicken">
               <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
               <p>Sencilla Pollo</p>
             </button>
-            <button class="single option-meal" id="single-vegan-burger">
+            <button class="single option-meal" id="ml-sh-single-veggie">
               <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
               <p>Sencilla Veggie</p>
             </button>
@@ -68,7 +68,7 @@
 
           <div class="garrison">
             <button class="option-meal color-pink">
-              <img src="../assets/fries/fries_sm.png" alt ="papas">
+              <img src="../assets/fries/fries_sm.png" alt="papas">
               <p>Papas fritas</p>
             </button>
             <button class="option-meal color-pink">
@@ -133,15 +133,24 @@
       <h2>ORDEN</h2>
       <br>
       <div class="row text-size">
-        <p class="col m4">#</p>
-        <p class="col m4">Item</p>
-        <p class="col m4">Orden</p>
+        <table>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Costo</th>
+          </tr>
+          <tr v-for="(item,index) in pickedItems" v-bind:key="item.name">
+            <td>{{ index++ }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+          </tr>
+        </table>
       </div>
       <div class="order-confirm">
-        <button class="option-meal color-white-green order-buttons">
+        <button class="action-button color-white-green order-buttons">
           <p>Cancelar orden</p>
         </button>
-        <button class="option-meal color-white-green order-buttons">
+        <button class="action-button color-white-green order-buttons">
           <p>Confirmar orden</p>
         </button>
       </div>
@@ -150,12 +159,65 @@
 </template>
 
 <script>
+import { fb, db } from "../js/firebase";
 export default {
   name: "MealsMenu",
   data() {
     return {
-      kindOfMenu: "Comida"
+      kindOfMenu: "Comida",
+      mealsFood: [],
+      pickedItems: [],
+      mealButtons: document.getElementsByClassName("option-meal"),
+      tickets: {
+        clientName: null,
+        order: null,
+        date: null
+      }
     };
+  },
+  methods: {
+    saveDataOrder() {
+      db.collection("tickets")
+        .add(this.tickets)
+        .then(docRef => {
+          console.log("Document written with ID: ", docRef.id);
+          this.reset();
+        })
+        .catch(function(error) {
+          console.error("Error adding document: ", error);
+        });
+    },
+    // Esta función es para que borre los inputs, pero en esta interfaz no sé si utilizaré alguno
+    reset() {
+      Object.assign(this.$data, this.$options.data.apply(this));
+    },
+    clickedButton() {
+      for (let button of this.mealButtons) {
+        button.addEventListener("click", () => {
+          const idButton = button.id;
+          this.identifyId(idButton, this.mealsFood);
+        });
+      }
+    },
+    identifyId(id, data) {
+      for (const item of data) {
+        if (id === item.id) {
+          console.log(item);
+          this.pickedItems.push(item);
+        }
+      }
+    }
+  },
+  created() {
+    db.collection("foodItems")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          // doc.data() is never undefined for query doc snapshots
+          this.mealsFood.push(doc.data());
+          // console.log(this.mealsFood);
+        });
+      });
   }
 };
 </script>
@@ -221,7 +283,8 @@ h3 {
   margin-bottom: 25%;
 }
 
-.option-meal {
+.option-meal,
+.action-button {
   justify-content: space-evenly;
   border-radius: 10%;
   border: none;
