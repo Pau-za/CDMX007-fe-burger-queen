@@ -171,9 +171,9 @@
             <td>{{ item.price }}</td>
           </tr>
           <tr>
-            <td> </td>
+            <td></td>
             <td>Total</td>
-            <td :v-model="sumOfPrices(pickedItems)">{{  }}</td>
+            <td></td>
           </tr>
         </table>
       </div>
@@ -181,9 +181,48 @@
         <button class="action-button color-white-green order-buttons">
           <p>Cancelar orden</p>
         </button>
-        <button class="action-button color-white-green order-buttons">
+        <button
+          data-target="modal1"
+          class="btn modal-trigger action-button color-white-green order-buttons"
+          @click="modalFn"
+        >Generar Ticket</button>
+        <!-- <button class="action-button color-white-green order-buttons" @click="getDate">
           <p>Confirmar orden</p>
-        </button>
+        </button>-->
+      </div>
+
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Ticket Orden</h4>
+          <h5>Nombre del Cliente:</h5>
+          <input type="text" v-model="tickets.name">
+          <table>
+            <tr>
+              <th>#</th>
+              <th>Item</th>
+              <th>Costo</th>
+            </tr>
+            <tr v-for="(item,index) in pickedItems" v-bind:key="index">
+              <td>{{ index }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.price }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td v-bind="tickets.total">Total</td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <a
+            href="#!"
+            class="modal-close waves-effect waves-green btn-flat"
+            @click="getDate();saveDataOrder()"
+          >Aceptar Orden</a>
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Modificar Orden</a>
+        </div>
       </div>
     </div>
   </div>
@@ -203,7 +242,8 @@ export default {
       tickets: {
         clientName: null,
         order: null,
-        date: null
+        date: null,
+        total: null
       }
     };
   },
@@ -223,27 +263,56 @@ export default {
     reset() {
       Object.assign(this.$data, this.$options.data.apply(this));
     },
-    // clickedButton() {
-    //   for (let button of this.mealButtons) {
-    //     button.addEventListener("click", () => {
-    //       const idButton = button.id;
-    //       this.identifyId(idButton, this.mealsFood);
-    //     });
-    //   }
-    // },
     identifyId(id, data) {
       for (const item of data) {
         if (id === item.id) {
           this.pickedItems.push(item);
         }
       }
-      console.log(this.pickedItems);
+      this.tickets.order = this.pickedItems;
+      // this.tickets.order.push(this.pickedItems);
+      console.log(this.tickets.order);
     },
-    sumOfPrices(arr){
-      for(const item of arr){
+    // función que ingresa el precio de cada objeto
+    // en un arreglo para después sumarlo y obtener el total
+    sumOfPrices(arr) {
+      for (const item of arr) {
         this.totalSum.push(item.price);
         console.log(this.totalSum);
       }
+    },
+    getDate() {
+      let today = new Date();
+      let dd = today.getDate();
+      let mm = today.getMonth() + 1;
+      let yyyy = today.getFullYear();
+      let hh = today.getHours();
+      let minutes = today.getMinutes();
+      let sec = today.getSeconds();
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+      today =
+        "Fecha: " +
+        dd +
+        "/" +
+        dd +
+        "/" +
+        yyyy +
+        "; hora: " +
+        hh +
+        ":" +
+        minutes +
+        ":" +
+        sec;
+      console.log(today);
+    },
+    modalFn() {
+      const elems = document.querySelectorAll(".modal");
+      const instances = M.Modal.init(elems, onOpenStart(this.getDate()));
     }
   },
   created() {
