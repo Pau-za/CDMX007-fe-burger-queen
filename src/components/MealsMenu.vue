@@ -153,7 +153,7 @@
         <button class="option-meal color-white-yellow">
           <p>Sin Ingredientes</p>
         </button>
-      </div> -->
+      </div>-->
     </div>
     <div class="ticket-container">
       <h2>ORDEN</h2>
@@ -173,7 +173,7 @@
           <tr>
             <td></td>
             <td>Total</td>
-            <td></td>
+            <td>{{ orderSum }}</td>
           </tr>
         </table>
       </div>
@@ -183,19 +183,21 @@
         </button>
         <button
           data-target="modal1"
-          class="btn modal-trigger action-button color-white-green order-buttons"
+          class="modal-trigger action-button color-white-green order-buttons"
           @click="modalFn();getDate()"
-        ><p>Generar Ticket</p></button>
+        >
+          <p>Generar Ticket</p>
+        </button>
         <!-- <button class="action-button color-white-green order-buttons" @click="getDate">
           <p>Confirmar orden</p>
         </button>-->
       </div>
 
       <!-- Modal Structure -->
-      <div id="modal1" class="modal">
+      <div id="modal1" class="modal modal-fixed-footer">
         <div class="modal-content">
-          <h4>Ticket Orden</h4>
-          <p>Fecha: {{today}}</p>
+          <h5>Ticket Orden</h5>
+          <p>Fecha: {{ today }}</p>
           <h5>Nombre del Cliente:</h5>
           <input type="text" v-model="tickets.clientName">
           <table>
@@ -211,8 +213,8 @@
             </tr>
             <tr>
               <td></td>
-              <td >Total</td>
-              <td v-bind="tickets.total">0</td>
+              <td>Total</td>
+              <td v-bind="tickets.total">{{ orderSum }}</td>
             </tr>
           </table>
         </div>
@@ -240,6 +242,8 @@ export default {
       pickedItems: [],
       mealButtons: document.getElementsByClassName("option-meal"),
       totalSum: [],
+      orderSum: 0,
+      today: '',
       tickets: {
         clientName: null,
         order: null,
@@ -268,34 +272,35 @@ export default {
       for (const item of data) {
         if (id === item.id) {
           this.pickedItems.push(item);
+          this.totalSum.push(item.price);
         }
       }
       this.tickets.order = this.pickedItems;
-      console.log(this.tickets.order);
+      this.sumOfPrices(this.totalSum);
     },
     // función que ingresa el precio de cada objeto
     // en un arreglo para después sumarlo y obtener el total
     sumOfPrices(arr) {
-      for (const item of arr) {
-        this.totalSum.push(item.price);
-        console.log(this.totalSum);
-      }
+      let sum = arr.reduce((a, b) => {
+        return a + b;
+      });
+      this.orderSum = sum;
     },
     getDate() {
-      let today = new Date();
-      let dd = today.getDate();
-      let mm = today.getMonth() + 1;
-      let yyyy = today.getFullYear();
-      let hh = today.getHours();
-      let minutes = today.getMinutes();
-      let sec = today.getSeconds();
+      this.today = new Date();
+      let dd = this.today.getDate();
+      let mm = this.today.getMonth() + 1;
+      let yyyy = this.today.getFullYear();
+      let hh = this.today.getHours();
+      let minutes = this.today.getMinutes();
+      let sec = this.today.getSeconds();
       if (dd < 10) {
         dd = "0" + dd;
       }
       if (mm < 10) {
         mm = "0" + mm;
       }
-      today =
+      this.today =
         "Fecha: " +
         dd +
         "/" +
@@ -308,7 +313,7 @@ export default {
         minutes +
         ":" +
         sec;
-      this.tickets.date=today;
+      this.tickets.date = this.today;
     },
     modalFn() {
       const elems = document.querySelectorAll(".modal");
@@ -468,8 +473,8 @@ h4 {
   width: 30%;
 }
 
-.modal{
-  color:#242e3a;
+.modal {
+  color: #242e3a;
 }
 
 #sm-burger-logo {
