@@ -134,7 +134,7 @@
           </div>
         </div>
       </div>
-      <div class="extra-options">
+      <!-- <div class="extra-options">
         <button class="option-meal color-white-pink">
           <p>Platillo</p>
         </button>
@@ -153,7 +153,7 @@
         <button class="option-meal color-white-yellow">
           <p>Sin Ingredientes</p>
         </button>
-      </div>
+      </div> -->
     </div>
     <div class="ticket-container">
       <h2>ORDEN</h2>
@@ -184,8 +184,8 @@
         <button
           data-target="modal1"
           class="btn modal-trigger action-button color-white-green order-buttons"
-          @click="modalFn"
-        >Generar Ticket</button>
+          @click="modalFn();getDate()"
+        ><p>Generar Ticket</p></button>
         <!-- <button class="action-button color-white-green order-buttons" @click="getDate">
           <p>Confirmar orden</p>
         </button>-->
@@ -195,23 +195,24 @@
       <div id="modal1" class="modal">
         <div class="modal-content">
           <h4>Ticket Orden</h4>
+          <p>Fecha: {{today}}</p>
           <h5>Nombre del Cliente:</h5>
-          <input type="text" v-model="tickets.name">
+          <input type="text" v-model="tickets.clientName">
           <table>
             <tr>
               <th>#</th>
               <th>Item</th>
               <th>Costo</th>
             </tr>
-            <tr v-for="(item,index) in pickedItems" v-bind:key="index">
+            <tr v-for="(item,index) in pickedItems" v-bind:key="index" v-bind="tickets.order">
               <td>{{ index }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.price }}</td>
             </tr>
             <tr>
               <td></td>
-              <td v-bind="tickets.total">Total</td>
-              <td></td>
+              <td >Total</td>
+              <td v-bind="tickets.total">0</td>
             </tr>
           </table>
         </div>
@@ -219,7 +220,7 @@
           <a
             href="#!"
             class="modal-close waves-effect waves-green btn-flat"
-            @click="getDate();saveDataOrder()"
+            @click="saveDataOrder"
           >Aceptar Orden</a>
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Modificar Orden</a>
         </div>
@@ -270,7 +271,6 @@ export default {
         }
       }
       this.tickets.order = this.pickedItems;
-      // this.tickets.order.push(this.pickedItems);
       console.log(this.tickets.order);
     },
     // función que ingresa el precio de cada objeto
@@ -308,11 +308,13 @@ export default {
         minutes +
         ":" +
         sec;
-      console.log(today);
+      this.tickets.date=today;
     },
     modalFn() {
       const elems = document.querySelectorAll(".modal");
-      const instances = M.Modal.init(elems, onOpenStart(this.getDate()));
+      const instance = M.Modal.getInstance(elems);
+      const instances = M.Modal.init(elems);
+      // instance.open();
     }
   },
   created() {
@@ -464,6 +466,10 @@ h4 {
 
 .order-buttons {
   width: 30%;
+}
+
+.modal{
+  color:#242e3a;
 }
 
 #sm-burger-logo {
