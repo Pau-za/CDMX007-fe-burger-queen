@@ -11,7 +11,7 @@
         <h4 class="col m-6" id="kind-of-menu">{{ kindOfMenu }}</h4>
       </div>
       <br>
-      <div class="menu-number">
+      <!-- <div class="menu-number">
         <h3>1</h3>
         <h3>2</h3>
         <h3>3</h3>
@@ -22,88 +22,114 @@
         <h3>8</h3>
         <h3>9</h3>
         <h3>0</h3>
-      </div>
+      </div>-->
       <div class="options-items-food">
         <div class="meals-selected">
+          <h4>Hamburguesas</h4>
           <div id="single-burgers" class="menu-display-space">
-            <button class="single option-meal" id="ml-sh-single-beef" name="Sencilla Res" @click="clickedButton">
+            <button class="single option-meal" @click="identifyId('ml-sh-single-beef',mealsFood)">
               <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
               <p>Sencilla Res</p>
             </button>
-            <button class="single option-meal" id="ml-sh-single-chicken">
+            <button
+              class="single option-meal"
+              @click="identifyId('ml-sh-single-chicken',mealsFood)"
+            >
               <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
               <p>Sencilla Pollo</p>
             </button>
-            <button class="single option-meal" id="ml-sh-single-veggie">
+            <button class="single option-meal" @click="identifyId('ml-sh-single-veggie',mealsFood)">
               <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
               <p>Sencilla Veggie</p>
             </button>
           </div>
 
           <div id="double-burgers" class="menu-display-space">
-            <button class="double option-meal" id="double-beef-burger">
+            <button class="double option-meal" @click="identifyId('ml-dh-double-beef',mealsFood)">
               <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
               <p>Doble Res</p>
             </button>
-            <button class="double option-meal" id="double-chicken-burger">
+            <button
+              class="double option-meal"
+              @click="identifyId('ml-dh-double-chicken',mealsFood)"
+            >
               <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
               <p>Doble Pollo</p>
             </button>
-            <button class="double option-meal" id="double-vegan-burger">
+            <button class="double option-meal" @click="identifyId('ml-dh-double-veggie',mealsFood)">
               <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
               <p>Doble Veggie</p>
             </button>
           </div>
 
-          <div class="beverages">
-            <button class="option-meal color-green">
-              <img src="../assets/water/water_bottle_sm.png" alt="agua">
-              <p>Agua</p>
+          <h4>Quitar ingredientes</h4>
+          <div class="no-ingredients">
+            <button
+              class="option-meal color-white-yellow"
+              @click="identifyId('ml-ni-onion',mealsFood)"
+            >
+              <img src="../assets/onion/onion_sm.png" alt="cebolla">
+              <p>Cebolla</p>
             </button>
-            <button class="option-meal color-green">
-              <img src="../assets/soda/soda_sm.png" alt="refresco">
-              <p>Refresco</p>
+            <button
+              class="option-meal color-white-yellow"
+              @click="identifyId('ml-ni-lettuce',mealsFood)"
+            >
+              <img src="../assets/lettuce/lettuce_sm.png" alt="lechuga">
+              <p>Lechuga</p>
+            </button>
+            <button
+              class="option-meal color-white-yellow"
+              @click="identifyId('ml-ni-tomato',mealsFood)"
+            >
+              <img src="../assets/tomato/tomato_sm.png" alt="jitomate">
+              <p>Jitomate</p>
+            </button>
+            <button
+              class="option-meal color-white-yellow"
+              @click="identifyId('ml-ni-pickles',mealsFood)"
+            >
+              <img src="../assets/pickles/pickles_sm.png" alt="pepinillos">
+              <p>Pepinillos</p>
             </button>
           </div>
 
-          <div class="garrison">
-            <button class="option-meal color-pink">
-              <img src="../assets/fries/fries_sm.png" alt="papas">
-              <p>Papas fritas</p>
-            </button>
-            <button class="option-meal color-pink">
-              <img src="../assets/onion_rings/onion_rings_sm.png" alt="aros-de-cebolla">
-              <p>Aros de cebolla</p>
-            </button>
-          </div>
-
+          <h4>Ingredientes extras</h4>
           <div class="extras">
-            <button class="option-meal color-yellow">
+            <button class="option-meal color-yellow" @click="identifyId('ml-ex-cheese',mealsFood)">
               <img src="../assets/cheese/cheese_sm.png" alt="queso">
               <p>Queso</p>
             </button>
-            <button class="option-meal color-yellow">
+            <button class="option-meal color-yellow" @click="identifyId('ml-ex-egg',mealsFood)">
               <img src="../assets/egg/egg_sm.png" alt="huevo">
               <p>Huevo</p>
             </button>
           </div>
 
-          <div class="no-ingredients">
-            <button class="option-meal color-white-yellow">
-              <img src="../assets/onion/onion_sm.png" alt="cebolla">
-              <p>Cebolla</p>
+          <h4>Bebidas</h4>
+          <div class="beverages">
+            <button class="option-meal color-green" @click="identifyId('ml-dr-water',mealsFood)">
+              <img src="../assets/water/water_bottle_sm.png" alt="agua">
+              <p>Agua</p>
             </button>
-            <button class="option-meal color-white-yellow">
-              <img src="../assets/lettuce/lettuce_sm.png" alt="lechuga">
-              <p>Lechuga</p>
+            <button class="option-meal color-green" @click="identifyId('ml-dr-soda',mealsFood)">
+              <img src="../assets/soda/soda_sm.png" alt="refresco">
+              <p>Refresco</p>
             </button>
-            <button class="option-meal color-white-yellow">
-              <img src="../assets/tomato/tomato_sm.png" alt="jitomate">
-              <p>Jitomate</p>
+          </div>
+
+          <h4>Guarniciones</h4>
+          <div class="garrison">
+            <button class="option-meal color-pink" @click="identifyId('ml-gr-fries',mealsFood)">
+              <img src="../assets/fries/fries_sm.png" alt="papas">
+              <p>Papas fritas</p>
             </button>
-            <button class="option-meal color-white-yellow">
-              <img src="../assets/pickles/pickles_sm.png" alt="pepinillos">
-              <p>Pepinillos</p>
+            <button
+              class="option-meal color-pink"
+              @click="identifyId('ml-gr-onion-rings',mealsFood)"
+            >
+              <img src="../assets/onion_rings/onion_rings_sm.png" alt="aros-de-cebolla">
+              <p>Aros de cebolla</p>
             </button>
           </div>
         </div>
@@ -139,10 +165,15 @@
             <th>Item</th>
             <th>Costo</th>
           </tr>
-          <tr v-for="(item,index) in pickedItems" v-bind:key="item.name">
-            <td>{{ index++ }}</td>
+          <tr v-for="(item,index) in pickedItems" v-bind:key="index">
+            <td>{{ index }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
+          </tr>
+          <tr>
+            <td> </td>
+            <td>Total</td>
+            <td :v-model="sumOfPrices(pickedItems)">{{  }}</td>
           </tr>
         </table>
       </div>
@@ -168,6 +199,7 @@ export default {
       mealsFood: [],
       pickedItems: [],
       mealButtons: document.getElementsByClassName("option-meal"),
+      totalSum: [],
       tickets: {
         clientName: null,
         order: null,
@@ -191,20 +223,26 @@ export default {
     reset() {
       Object.assign(this.$data, this.$options.data.apply(this));
     },
-    clickedButton() {
-      for (let button of this.mealButtons) {
-        button.addEventListener("click", () => {
-          const idButton = button.id;
-          this.identifyId(idButton, this.mealsFood);
-        });
-      }
-    },
+    // clickedButton() {
+    //   for (let button of this.mealButtons) {
+    //     button.addEventListener("click", () => {
+    //       const idButton = button.id;
+    //       this.identifyId(idButton, this.mealsFood);
+    //     });
+    //   }
+    // },
     identifyId(id, data) {
       for (const item of data) {
         if (id === item.id) {
-          console.log(item);
           this.pickedItems.push(item);
         }
+      }
+      console.log(this.pickedItems);
+    },
+    sumOfPrices(arr){
+      for(const item of arr){
+        this.totalSum.push(item.price);
+        console.log(this.totalSum);
       }
     }
   },
@@ -229,7 +267,11 @@ p {
 
 h3 {
   margin-top: 1%;
-  margin-bottom: 3%;
+  margin-bottom: 2%;
+}
+
+h4 {
+  color: white;
 }
 
 .container {
@@ -247,7 +289,7 @@ h3 {
 }
 
 .logo-title {
-  height: 8%;
+  /* height: 8%; */
   color: white;
   background-color: #38404a;
   margin: 1% 0%;
@@ -264,7 +306,7 @@ h3 {
   display: flex;
   justify-content: space-around;
   color: white;
-  height: 9%;
+  /* height: 9%; */
 }
 
 .ticket-container {
@@ -272,7 +314,7 @@ h3 {
   margin-top: 2%;
   background-color: #38404a;
   color: white;
-  margin-bottom: -1%;
+  margin-bottom: 0%;
 }
 
 .meals-selected {
@@ -280,7 +322,7 @@ h3 {
   flex-direction: column;
   align-items: inherit;
   flex-grow: 1;
-  margin-bottom: 25%;
+  margin-bottom: 2%;
 }
 
 .option-meal,
@@ -315,9 +357,9 @@ h3 {
   padding: 5% 0%;
 }
 
-.options-itmes-food {
+/* .options-itmes-food {
   margin-bottom: 3%;
-}
+} */
 
 .color-white-pink {
   background-color: rgb(231, 209, 229);
@@ -347,9 +389,9 @@ h3 {
   font-size: 1.4em;
 }
 
-.order-confirm {
+/* .order-confirm {
   margin-top: 129%;
-}
+} */
 
 .order-buttons {
   width: 30%;
