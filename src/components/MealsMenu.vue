@@ -62,7 +62,7 @@
             </button>
           </div>
 
-          <h4>Quitar ingredientes</h4>
+          <h4>Sin ingredientes</h4>
           <div class="no-ingredients">
             <button
               class="option-meal color-white-yellow"
@@ -124,36 +124,17 @@
               <img src="../assets/fries/fries_sm.png" alt="papas">
               <p>Papas fritas</p>
             </button>
-            <button
+            <!-- En este momento este botón está generando problemas, lo comentaré en lo que descubro cuál es -->
+            <!-- <button
               class="option-meal color-pink"
-              @click="identifyId('ml-gr-onion-rings',mealsFood)"
+              @click="identifyId('ml-gr-rings',mealsFood)"
             >
-              <img src="../assets/onion_rings/onion_rings_sm.png" alt="aros-de-cebolla">
+              <img src="../assets/onion_rings/onion_rings_sm.png" alt="aros">
               <p>Aros de cebolla</p>
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
-      <!-- <div class="extra-options">
-        <button class="option-meal color-white-pink">
-          <p>Platillo</p>
-        </button>
-        <button class="option-meal color-green">
-          <p>Bebidas</p>
-        </button>
-        <button class="option-meal color-pink">
-          <p>Guarnición</p>
-        </button>
-        <button class="option-meal color-white-green">
-          <p>OK</p>
-        </button>
-        <button class="option-meal color-yellow">
-          <p>Extra</p>
-        </button>
-        <button class="option-meal color-white-yellow">
-          <p>Sin Ingredientes</p>
-        </button>
-      </div>-->
     </div>
     <div class="ticket-container">
       <h2>ORDEN</h2>
@@ -184,13 +165,10 @@
         <button
           data-target="modal1"
           class="modal-trigger action-button color-white-green order-buttons"
-          @click="modalFn();getDate()"
+          @click="modalFn();getDate();toPay()"
         >
           <p>Generar Ticket</p>
         </button>
-        <!-- <button class="action-button color-white-green order-buttons" @click="getDate">
-          <p>Confirmar orden</p>
-        </button>-->
       </div>
 
       <!-- Modal Structure -->
@@ -214,7 +192,7 @@
             <tr>
               <td></td>
               <td>Total</td>
-              <td v-bind="tickets.total">{{ orderSum }}</td>
+              <td :v-bind="tickets.total">{{ orderSum }}</td>
             </tr>
           </table>
         </div>
@@ -222,7 +200,7 @@
           <a
             href="#!"
             class="modal-close waves-effect waves-green btn-flat"
-            @click="saveDataOrder"
+            @click="saveDataOrder(),toPay()"
           >Aceptar Orden</a>
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Modificar Orden</a>
         </div>
@@ -243,7 +221,7 @@ export default {
       mealButtons: document.getElementsByClassName("option-meal"),
       totalSum: [],
       orderSum: 0,
-      today: '',
+      today: "",
       tickets: {
         clientName: null,
         order: null,
@@ -301,10 +279,9 @@ export default {
         mm = "0" + mm;
       }
       this.today =
-        "Fecha: " +
         dd +
         "/" +
-        dd +
+        mm +
         "/" +
         yyyy +
         "; hora: " +
@@ -320,6 +297,9 @@ export default {
       const instance = M.Modal.getInstance(elems);
       const instances = M.Modal.init(elems);
       // instance.open();
+    },
+    toPay() {
+      this.tickets.total = this.orderSum;
     }
   },
   created() {
