@@ -8,21 +8,9 @@
           src="../assets/logo_burquerqueen/logo_burguer_sm.png"
           alt="logo-burgerqueen"
         >
-        <h4 class="col m-6" id="kind-of-menu">{{ kindOfMenu }}</h4>
+        <h2 class="col m-6" id="kind-of-menu">{{ kindOfMenu }}</h2>
       </div>
       <br>
-      <!-- <div class="menu-number">
-        <h3>1</h3>
-        <h3>2</h3>
-        <h3>3</h3>
-        <h3>4</h3>
-        <h3>5</h3>
-        <h3>6</h3>
-        <h3>7</h3>
-        <h3>8</h3>
-        <h3>9</h3>
-        <h3>0</h3>
-      </div>-->
       <div class="options-items-food">
         <div class="meals-selected">
           <h4>Hamburguesas</h4>
@@ -131,12 +119,27 @@
             >
               <img src="../assets/onion_rings/onion_rings_sm.png" alt="aros">
               <p>Aros de cebolla</p>
-            </button> -->
+            </button>-->
           </div>
         </div>
       </div>
     </div>
     <div class="ticket-container">
+      <div class="menu-options container">
+        <router-link class="has-router" to="/">
+          <img
+            class="ticket-icons col m4 l4"
+            src="../assets/menu_icons/menu_icon_sm.png"
+            alt="menu-icon"
+          >
+        </router-link>
+        <img
+          class="ticket-icons col m4 l4"
+          src="../assets/menu_icons/configuracion.png"
+          alt="configuration-icon"
+        >
+        <img class="ticket-icons col m4 l4" src="../assets/logout/logout_sm.png" alt="logout-icon">
+      </div>
       <h2>ORDEN</h2>
       <br>
       <div class="row text-size">
@@ -171,7 +174,6 @@
         </button>
       </div>
 
-      <!-- Modal Structure -->
       <div id="modal1" class="modal modal-fixed-footer">
         <div class="modal-content">
           <h5>Ticket Orden</h5>
@@ -307,9 +309,7 @@ export default {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          // doc.data() is never undefined for query doc snapshots
           this.mealsFood.push(doc.data());
-          // console.log(this.mealsFood);
         });
       });
   }
@@ -345,7 +345,6 @@ h4 {
 }
 
 .logo-title {
-  /* height: 8%; */
   color: white;
   background-color: #38404a;
   margin: 1% 0%;
@@ -362,15 +361,25 @@ h4 {
   display: flex;
   justify-content: space-around;
   color: white;
-  /* height: 9%; */
 }
 
 .ticket-container {
   width: 34%;
-  margin-top: 2%;
+  margin-top: 2.7%;
   background-color: #38404a;
   color: white;
   margin-bottom: 0%;
+}
+
+.menu-options {
+  background-color: #38404a;
+  margin-top: 0%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.has-router {
+  display: flex;
 }
 
 .meals-selected {
@@ -413,10 +422,6 @@ h4 {
   padding: 5% 0%;
 }
 
-/* .options-itmes-food {
-  margin-bottom: 3%;
-} */
-
 .color-white-pink {
   background-color: rgb(231, 209, 229);
 }
@@ -445,10 +450,6 @@ h4 {
   font-size: 1.4em;
 }
 
-/* .order-confirm {
-  margin-top: 129%;
-} */
-
 .order-buttons {
   width: 30%;
 }
@@ -458,7 +459,7 @@ h4 {
 }
 
 #sm-burger-logo {
-  width: 9%;
+  width: 16%;
 }
 
 #single-burgers {
@@ -466,7 +467,7 @@ h4 {
 }
 
 #kind-of-menu {
-  margin: 0%;
+  margin: 2% 0%;
 }
 </style>
 
