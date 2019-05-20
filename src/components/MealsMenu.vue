@@ -169,8 +169,9 @@
           data-target="modal1"
           class="modal-trigger action-button color-white-green order-buttons"
           @click="modalFn();getDate();toPay()"
+          
         >
-          <p>Generar Ticket</p>
+          <p><router-link to="/MealsMenu">Generar Ticket</router-link></p>
         </button>
       </div>
 
