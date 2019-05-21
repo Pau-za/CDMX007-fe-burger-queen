@@ -148,11 +148,15 @@
             <th>#</th>
             <th>Item</th>
             <th>Costo</th>
+            <th>Opciones</th>
           </tr>
           <tr v-for="(item,index) in pickedItems" v-bind:key="index">
             <td>{{ index }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
+            <td>
+              <i class="far fa-trash-alt" @click="deleteItemFn(index)"></i>
+            </td>
           </tr>
           <tr>
             <td></td>
@@ -169,9 +173,10 @@
           data-target="modal1"
           class="modal-trigger action-button color-white-green order-buttons"
           @click="modalFn();getDate();toPay()"
-          
         >
-          <p><router-link to="/MealsMenu">Generar Ticket</router-link></p>
+          <p>
+            <router-link to="/MealsMenu">Generar Ticket</router-link>
+          </p>
         </button>
       </div>
 
@@ -200,12 +205,22 @@
           </table>
         </div>
         <div class="modal-footer">
-          <a
+          <button
+            id="send-order"
+            class="modal-close waves-effect waves-green btn-flat"
+            @click="saveDataOrder(),toPay()"
+          >
+            <img src="../assets/send/send_sm.png" alt="send-order-button">
+          </button>
+          <!-- <a
             href="#!"
             class="modal-close waves-effect waves-green btn-flat"
             @click="saveDataOrder(),toPay()"
-          >Aceptar Orden</a>
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Modificar Orden</a>
+          >Aceptar Orden</a>-->
+          <button id="edit-order" class="modal-close waves-effect waves-green btn-flat">
+            <i id="edit-icon" class="far fa-edit"></i>
+          </button>
+          <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Modificar Orden</a> -->
         </div>
       </div>
     </div>
@@ -214,6 +229,7 @@
 
 <script>
 import { fb, db } from "../js/firebase";
+import Swal from 'sweetalert2';
 export default {
   name: "MealsMenu",
   data() {
@@ -234,9 +250,9 @@ export default {
     };
   },
   methods: {
-    saveDataOrder() {
+    saveDataOrder(arr) {
       db.collection("tickets")
-        .add(this.tickets)
+        .add(arr)
         .then(docRef => {
           console.log("Document written with ID: ", docRef.id);
           this.reset();
@@ -258,6 +274,28 @@ export default {
       }
       this.tickets.order = this.pickedItems;
       this.sumOfPrices(this.totalSum);
+    },
+    deleteItemFn(index){
+      this.pickedItems.splice(index, 1);
+      this.totalSum.splice(index,1);
+      this.sumOfPrices(this.totalSum);
+    },
+    deleteTicketFn(doc) {
+      console.log("Hola, Pau <3");
+      Swal.fire({
+        title: "¿Estás segur@?",
+        text: "Esta acción no podrá ser revertida",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Estoy segur@"
+      }).then(result => {
+        if (result.value) {
+          console.log(doc);
+          Swal.fire("Listo!", "El elemento ha sido borrado de la cuenta", "success");
+        }
+      });
     },
     // función que ingresa el precio de cada objeto
     // en un arreglo para después sumarlo y obtener el total
@@ -301,8 +339,8 @@ export default {
       const instances = M.Modal.init(elems);
       // instance.open();
     },
-    toPay() {
-      this.tickets.total = this.orderSum;
+    toPay(arr) {
+      arr.total = this.orderSum;
     }
   },
   created() {
@@ -459,6 +497,12 @@ h4 {
   color: #242e3a;
 }
 
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  height: 13%;
+}
+
 #sm-burger-logo {
   width: 16%;
 }
@@ -469,6 +513,21 @@ h4 {
 
 #kind-of-menu {
   margin: 2% 0%;
+}
+
+#send-order #edit-order {
+  width: 20%;
+  height: 100%;
+  padding: 1% 0% 8%;
+}
+/* 
+#edit-order {
+  
+} */
+
+#edit-icon {
+  font-size: 3em;
+  height: auto;
 }
 </style>
 
