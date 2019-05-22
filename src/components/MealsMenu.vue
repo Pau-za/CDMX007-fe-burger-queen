@@ -250,9 +250,9 @@ export default {
     };
   },
   methods: {
-    saveDataOrder(arr) {
+    saveDataOrder() {
       db.collection("tickets")
-        .add(arr)
+        .add(this.tickets)
         .then(docRef => {
           console.log("Document written with ID: ", docRef.id);
           this.reset();
@@ -339,8 +339,8 @@ export default {
       const instances = M.Modal.init(elems);
       // instance.open();
     },
-    toPay(arr) {
-      arr.total = this.orderSum;
+    toPay() {
+      this.totalSum.total = this.orderSum;
     }
   },
   created() {
