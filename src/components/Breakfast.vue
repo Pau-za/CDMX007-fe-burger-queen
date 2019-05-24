@@ -1,205 +1,481 @@
 <template>
-  <div class="general-menu">
-    <div id="top-menu">#</div>
-    <div class="upper-menu">
-      <div class="menu-name">
+  <div class="container">
+    <div class="items-container">
+      <div class="logo-title row">
         <img
+          class="col m-6"
           id="sm-burger-logo"
           src="../assets/logo_burquerqueen/logo_burguer_sm.png"
           alt="logo-burgerqueen"
         >
-        <h4 id="kind-of-menu">{{ kindOfMenu }}</h4>
+        <h2 class="col m-6" id="kind-of-menu">{{ kindOfMenu }}</h2>
       </div>
-      <div class="menu-number">
-        <h3>1</h3>
-        <h3>2</h3>
-        <h3>3</h3>
-        <h3>4</h3>
-        <h3>5</h3>
-        <h3>6</h3>
-        <h3>7</h3>
-        <h3>8</h3>
-        <h3>9</h3>
-        <h3>0</h3>
-        <h3 id="order-title">ORDEN</h3>
+      <br>
+      <div class="options-items-food">
+        <div class="meals-selected">
+          <h4>Sandwitch</h4>
+          <div id="single-burgers" class="menu-display-space">
+            <button class="single option-bf" @click="identifyId('bf-sn-sandwitch',brkfstFood)">
+              <img src="../assets/sandwitch/sandwitch_sm.png" alt>
+              <p>Sandwitch</p>
+            </button>
+          </div>
+
+          <h4>Sin ingredientes</h4>
+          <div class="no-ingredients">
+            <button
+              class="option-bf color-white-yellow"
+              @click="identifyId('bf-ex-onion',brkfstFood)"
+            >
+              <img src="../assets/onion/onion_sm.png" alt="cebolla">
+              <p>Cebolla</p>
+            </button>
+            <button
+              class="option-bf color-white-yellow"
+              @click="identifyId('bf-ni-lettuce',brkfstFood)"
+            >
+              <img src="../assets/lettuce/lettuce_sm.png" alt="lechuga">
+              <p>Lechuga</p>
+            </button>
+            <button
+              class="option-bf color-white-yellow"
+              @click="identifyId('bf-ni-tomato',brkfstFood)"
+            >
+              <img src="../assets/tomato/tomato_sm.png" alt="jitomate">
+              <p>Jitomate</p>
+            </button>
+            <button class="option-bf color-yellow" @click="identifyId('bf-ni-cheese',brkfstFood)">
+              <img src="../assets/cheese/cheese_sm.png" alt="queso">
+              <p>Queso</p>
+            </button>
+          </div>
+
+          <h4>Bebidas</h4>
+          <div class="beverages">
+            <button class="option-bf color-green" @click="identifyId('bf-dr-milky-coffee',brkfstFood)">
+              <img src="../assets/milky_coffee/milky_coffee_sm.png" alt="mily-coffee">
+              <p>Café lechero</p>
+            </button>
+            <button class="option-bf color-green" @click="identifyId('bf-dr-dark-coffee',brkfstFood)">
+              <img src="../assets/black_coffee/coffee_sm.png" alt="clack-coffee">
+              <p>Café negro</p>
+            </button>
+            <button class="option-bf color-green" @click="identifyId('bf-dr-juice',brkfstFood)">
+              <img src="../assets/orange_juice/orange_juice_sm.png" alt="juice">
+              <p>Jugo</p>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="menu-options">
-      <img class="ticket-icons" src="../assets/menu_icons/menu_icon_sm.png" alt="menu-icon">
-      <img
-        class="ticket-icons"
-        src="../assets/menu_icons/configuracion.png"
-        alt="configuration-icon"
-      >
-      <img class="ticket-icons" src="../assets/logout/logout_sm.png" alt="logout-icon">
-    </div>
-
-    <div class="sell-info">
-      <div class="picked-items">
-        <h6 id="kind-of-menu">{{ item }}</h6>
-        <h6 id="kind-of-menu">{{ costo }}</h6>
+    <div class="ticket-container">
+      <div class="menu-options container">
+        <router-link class="has-router" to="/">
+          <img
+            class="ticket-icons col m4 l4"
+            src="../assets/menu_icons/menu_icon_sm.png"
+            alt="menu-icon"
+          >
+        </router-link>
+        <img
+          class="ticket-icons col m4 l4"
+          src="../assets/menu_icons/configuracion.png"
+          alt="configuration-icon"
+        >
+        <img class="ticket-icons col m4 l4" src="../assets/logout/logout_sm.png" alt="logout-icon">
+      </div>
+      <h2>ORDEN</h2>
+      <br>
+      <div class="row text-size">
+        <table>
+          <tr>
+            <!-- <th>#</th> -->
+            <th>Item</th>
+            <th>Costo</th>
+            <th>Opciones</th>
+          </tr>
+          <tr v-for="(item,index) in pickedItems" v-bind:key="index">
+            <!-- <td>{{ index }}</td> -->
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>
+              <i class="far fa-trash-alt" @click="deleteItemFn(index)"></i>
+            </td>
+          </tr>
+          <tr>
+            <!-- <td></td> -->
+            <td>Total</td>
+            <td>{{ orderSum }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="order-confirm">
+        <button class="action-button color-white-green order-buttons">
+          <p>Cancelar orden</p>
+        </button>
+        <button
+          data-target="modal1"
+          class="modal-trigger action-button color-white-green order-buttons"
+          @click="modalFn();getDate();toPay()"
+        >
+          <p>
+            Generar Ticket
+            <!-- <router-link to="/MealsMenu">Generar Ticket</router-link> -->
+          </p>
+        </button>
       </div>
 
-      <!-- <div id="single-burgers" class="meals-selected">
-        <div class="menu-display-space">
-          <button class="single option-meal" id="single-beef-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Sencilla Res</h5>
-          </button>
-          <button class="single option-meal" id="single-chicken-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Sencilla Pollo</h5>
-          </button>
-          <button class="single option-meal" id="single-vegan-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Sencilla Vegetariana</h5>
-          </button>
+      <div id="modal1" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h5>Ticket Orden</h5>
+          <p>Fecha: {{ today }}</p>
+          <h5>Nombre del Cliente:</h5>
+          <input type="text" v-model="bfTickets.clientName">
+          <table>
+            <tr>
+              <th>#</th>
+              <th>Item</th>
+              <th>Costo</th>
+            </tr>
+            <tr v-for="(item,index) in pickedItems" v-bind:key="index" v-bind="bfTickets.order">
+              <td>{{ index }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.price }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Total</td>
+              <td :v-bind="bfTickets.total">{{ orderSum }}</td>
+            </tr>
+          </table>
         </div>
-
-        <div id="double-burgers" class="menu-display-space">
-          <button class="double option-meal" id="double-beef-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Doble Res</h5>
+        <div class="modal-footer">
+          <button
+            id="send-order"
+            class="modal-close waves-effect waves-green btn-flat"
+            @click="saveDataOrder(),toPay()"
+          >
+            <img src="../assets/send/send_sm.png" alt="send-order-button">
           </button>
-          <button class="double option-meal" id="double-chicken-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Doble Pollo</h5>
+          <!-- <a
+            href="#!"
+            class="modal-close waves-effect waves-green btn-flat"
+            @click="saveDataOrder(),toPay()"
+          >Aceptar Orden</a>-->
+          <button id="edit-order" class="modal-close waves-effect waves-green btn-flat">
+            <i id="edit-icon" class="far fa-edit"></i>
           </button>
-          <button class="double option-meal" id="double-vegan-burger">
-            <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
-            <h5>Doble Vegetariana</h5>
-          </button>
+          <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Modificar Orden</a> -->
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { fb, db } from "../js/firebase";
+import Swal from 'sweetalert2';
 export default {
   name: "Breakfast",
-  data() {
-    return {
-      kindOfMenu: "Comida",
-      item: "Producto",
-      costo: "Costo"
-    };
+  data(){
+    return{
+       kindOfMenu: "Desayuno",
+      brkfstFood: [],
+      pickedItems: [],
+      bfButtons: document.getElementsByClassName("option-bf"),
+      totalSum: [],
+      orderSum: 0,
+      today: "",
+      bfTickets: {
+        clientName: null,
+        order: null,
+        date: null,
+        total: null
+      }
+    }
+  },
+   methods: {
+    saveDataOrder() {
+      db.collection("bfTickets")
+        .add(this.bfTickets)
+        .then(docRef => {
+          console.log("Document written with ID: ", docRef.id);
+          this.reset();
+        })
+        .catch(function(error) {
+          console.error("Error adding document: ", error);
+        });
+    },
+    // Esta función es para que borre los inputs, pero en esta interfaz no sé si utilizaré alguno
+    reset() {
+      Object.assign(this.$data, this.$options.data.apply(this));
+    },
+    identifyId(id, data) {
+      for (const item of data) {
+        if (id === item.id) {
+          console.log(item);
+          this.pickedItems.push(item);
+          this.totalSum.push(item.price);
+        }
+      }
+      this.bfTickets.order = this.pickedItems;
+      this.sumOfPrices(this.totalSum);
+    },
+    deleteItemFn(index){
+      this.pickedItems.splice(index, 1);
+      this.totalSum.splice(index,1);
+      this.sumOfPrices(this.totalSum);
+    },
+    // deleteTicketFn(doc) {
+    //   // console.log("Hola, Pau <3");
+    //   Swal.fire({
+    //     title: "¿Estás segur@?",
+    //     text: "Esta acción no podrá ser revertida",
+    //     type: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: "Estoy segur@"
+    //   }).then(result => {
+    //     if (result.value) {
+    //       console.log(doc);
+    //       Swal.fire("Listo!", "El elemento ha sido borrado de la cuenta", "success");
+    //     }
+    //   });
+    // },
+    // función que ingresa el precio de cada objeto
+    // en un arreglo para después sumarlo y obtener el total
+    sumOfPrices(arr) {
+      let sum = arr.reduce((a, b) => {
+        return a + b;
+      });
+      this.orderSum = sum;
+    },
+    getDate() {
+      this.today = new Date();
+      let dd = this.today.getDate();
+      let mm = this.today.getMonth() + 1;
+      let yyyy = this.today.getFullYear();
+      let hh = this.today.getHours();
+      let minutes = this.today.getMinutes();
+      let sec = this.today.getSeconds();
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+      this.today =
+        dd +
+        "/" +
+        mm +
+        "/" +
+        yyyy +
+        "; hora: " +
+        hh +
+        ":" +
+        minutes +
+        ":" +
+        sec;
+      this.bfTickets.date = this.today;
+    },
+    modalFn() {
+      const elems = document.querySelectorAll(".modal");
+      const instance = M.Modal.getInstance(elems);
+      const instances = M.Modal.init(elems);
+      // instance.open();
+    },
+    toPay() {
+      this.totalSum.total = this.orderSum;
+    }
+  },
+  created() {
+    db.collection("breakfastItems")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          this.brkfstFood.push(doc.data());
+        });
+      });
   }
-};
+}
 </script>
 
+
+
 <style scoped>
-h4,
-h5,
-h6 {
-  display: -webkit-inline-box;
-  font-weight: 700;
+p {
   margin-top: 0%;
 }
 
 h3 {
-  margin: 0% 2%;
-  font-weight: 700;
+  margin-top: 1%;
+  margin-bottom: 2%;
 }
 
-.general-menu {
+h4 {
+  color: white;
+}
+
+.container {
+  display: flex;
   background-color: #242e3a;
   width: 100%;
+  height: 0 auto;
+  margin-top: -6%;
 }
 
-.upper-menu {
+.items-container {
+  width: 66%;
+  margin-top: 2%;
+  border-right: 2px solid white;
+}
+
+.logo-title {
+  color: white;
   background-color: #38404a;
-  color: rgb(251, 252, 253);
-  height: 0%;
-  width: 102%;
-  margin-top: 0%;
+  margin: 1% 0%;
 }
 
 .menu-number {
   background-color: #242e3a;
-  display: -webkit-inline-box;
-  margin: 0% 0% 0% 0%;
+  margin: -6% 0% 5% 0%;
   width: 100%;
-  border-bottom: 3px solid black;
+  border-bottom: 1px solid black;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-around;
+  color: white;
+}
+
+.ticket-container {
+  width: 34%;
+  margin-top: 2.7%;
+  background-color: #38404a;
+  color: white;
+  margin-bottom: 0%;
 }
 
 .menu-options {
-  margin: -10% 0% 0% 62%;
-  width: 40%;
-}
-
-.sell-info {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  color: white;
-  width: 102%;
-}
-
-.picked-items {
-  width: 36%;
   background-color: #38404a;
-  margin: 5.3% 0% 0% 0%;
-  padding: 3% 0% 57% 0%;
-  border-left: 4px solid white;
+  margin-top: 0%;
+  display: flex;
+  justify-content: space-around;
 }
 
-.ticket-icons {
-  margin: 0% 10%;
-  width: 10%;
+.has-router {
+  display: flex;
 }
 
 .meals-selected {
-  background-color: #242e3a;
-  margin: 5.3% 0% 0% 0%;
-  width: 64%;
-  padding-bottom: 27%;
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  flex-grow: 1;
+  margin-bottom: 2%;
 }
 
-.option-meal {
+.option-bf,
+.action-button {
   justify-content: space-evenly;
-  display: inline-flex;
   border-radius: 10%;
   border: none;
+  margin: 2%;
+  width: 17%;
+  font-size: 1.3em;
+  font-weight: 500;
+  margin: -1% 2% 2% 1%;
+}
+
+.menu-display-space {
+  margin-bottom: 1%;
 }
 
 .single {
   height: 34%;
   background-color: #eab126;
-  margin: 2%;
-  width: 28%;
 }
 
 .double {
   height: 34%;
   background-color: #ff6a5c;
-  margin: 2%;
-  width: 28%;
 }
 
-.menu-display-space {
-  margin-left: -6%;
+.extra-options {
+  background-color: #38404a;
+  margin-bottom: 0%;
+  padding: 5% 0%;
+}
+
+.color-white-pink {
+  background-color: rgb(231, 209, 229);
+}
+
+.color-green {
+  background-color: #20948b;
+}
+
+.color-pink {
+  background-color: #c08dba;
+}
+
+.color-white-green {
+  background-color: rgb(213, 228, 173);
+}
+
+.color-yellow {
+  background-color: #eddd4c;
+}
+
+.color-white-yellow {
+  background-color: #dad87a;
+}
+
+.text-size {
+  font-size: 1.4em;
+}
+
+.order-buttons {
+  width: 30%;
+}
+
+.modal {
+  color: #242e3a;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  height: 13%;
 }
 
 #sm-burger-logo {
-  margin: 1% 0% -2% -55%;
-  width: 7%;
+  width: 16%;
+}
+
+#single-burgers {
+  margin-left: 0%;
 }
 
 #kind-of-menu {
-  margin: -2% 14% 2% 5%;
+  margin: 2% 0%;
 }
 
-#top-menu {
-  background-color: #242e3a;
-  color: #242e3a;
-  margin-top: -6%;
-  width: 102%;
-  padding: 1% 0%;
+#send-order #edit-order {
+  width: 20%;
+  height: 100%;
+  padding: 1% 0% 8%;
 }
+/* 
+#edit-order {
+  
+} */
 
-#order-title {
-  margin-left: 11%;
+#edit-icon {
+  font-size: 3em;
+  height: auto;
 }
 </style>
 

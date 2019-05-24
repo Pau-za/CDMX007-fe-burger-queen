@@ -4,6 +4,7 @@ import FoodElection from '@/components/FoodElection';
 import MealsMenu from '@/components/MealsMenu';
 import BreakfastMenu from '@/components/BreakfastMenu';
 import GeneralMenu from '@/components/GeneralMenu';
+import Breakfast from '@/components/Breakfast';
 
 /* eslint-disable */
 
@@ -31,5 +32,10 @@ export default new Router({
       name: 'GeneralMenu',
       component: GeneralMenu,
     },
+    {
+      path: '/breakfast',
+      name: 'Breakfast',
+      component: Breakfast,
+    }
   ],
 });

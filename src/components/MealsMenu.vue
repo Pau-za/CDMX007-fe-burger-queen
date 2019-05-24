@@ -268,6 +268,7 @@ export default {
     identifyId(id, data) {
       for (const item of data) {
         if (id === item.id) {
+          console.log(item);
           this.pickedItems.push(item);
           this.totalSum.push(item.price);
         }
