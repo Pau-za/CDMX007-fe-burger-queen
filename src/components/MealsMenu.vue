@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="main-container">
     <div class="items-container">
       <div class="logo-title row">
         <img
@@ -145,13 +145,13 @@
       <div class="row text-size">
         <table>
           <tr>
-            <th>#</th>
+            <!-- <th>#</th> -->
             <th>Item</th>
             <th>Costo</th>
             <th>Opciones</th>
           </tr>
           <tr v-for="(item,index) in pickedItems" v-bind:key="index">
-            <td>{{ index }}</td>
+            <!-- <td>{{ index }}</td> -->
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
             <td>
@@ -188,17 +188,14 @@
           <input type="text" v-model="tickets.clientName">
           <table>
             <tr>
-              <th>#</th>
               <th>Item</th>
               <th>Costo</th>
             </tr>
             <tr v-for="(item,index) in pickedItems" v-bind:key="index" v-bind="tickets.order">
-              <td>{{ index }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.price }}</td>
             </tr>
             <tr>
-              <td></td>
               <td>Total</td>
               <td :v-bind="tickets.total">{{ orderSum }}</td>
             </tr>
@@ -229,7 +226,7 @@
 
 <script>
 import { fb, db } from "../js/firebase";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 export default {
   name: "MealsMenu",
   data() {
@@ -254,21 +251,27 @@ export default {
       db.collection("tickets")
         .add(this.tickets)
         .then(docRef => {
-          console.log("Document written with ID: ", docRef.id);
+          alert(
+            "Tu pedido ha sido enviado a cocina con el siguiente identificador: " +
+              docRef.id
+          );
           this.reset();
         })
         .catch(function(error) {
-          console.error("Error adding document: ", error);
+          if (error) {
+            console.log(
+              "Se produjo el siguiente error al enviar la orden: " + error
+            );
+          }
         });
     },
     // Esta función es para que borre los inputs, pero en esta interfaz no sé si utilizaré alguno
     reset() {
-      Object.assign(this.$data, this.$options.data.apply(this));
+      Object.assign(this.$data, this.$options.data.call(this));
     },
     identifyId(id, data) {
       for (const item of data) {
         if (id === item.id) {
-          console.log(item);
           this.pickedItems.push(item);
           this.totalSum.push(item.price);
         }
@@ -276,9 +279,9 @@ export default {
       this.tickets.order = this.pickedItems;
       this.sumOfPrices(this.totalSum);
     },
-    deleteItemFn(index){
+    deleteItemFn(index) {
       this.pickedItems.splice(index, 1);
-      this.totalSum.splice(index,1);
+      this.totalSum.splice(index, 1);
       this.sumOfPrices(this.totalSum);
     },
     deleteTicketFn(doc) {
@@ -294,13 +297,18 @@ export default {
       }).then(result => {
         if (result.value) {
           console.log(doc);
-          Swal.fire("Listo!", "El elemento ha sido borrado de la cuenta", "success");
+          Swal.fire(
+            "Listo!",
+            "El elemento ha sido borrado de la cuenta",
+            "success"
+          );
         }
       });
     },
     // función que ingresa el precio de cada objeto
     // en un arreglo para después sumarlo y obtener el total
     sumOfPrices(arr) {
+      console.log(arr);
       let sum = arr.reduce((a, b) => {
         return a + b;
       });
@@ -370,12 +378,13 @@ h4 {
   color: white;
 }
 
-.container {
+.main-container {
   display: flex;
   background-color: #242e3a;
   width: 100%;
   height: 0 auto;
   margin-top: -6%;
+  /* height: -webkit-fill-available; */
 }
 
 .items-container {
@@ -496,6 +505,7 @@ h4 {
 
 .modal {
   color: #242e3a;
+  font-size: 1em;
 }
 
 .modal-footer {

@@ -15,7 +15,7 @@
         <div class="meals-selected">
           <h4>Sandwitch</h4>
           <div id="single-burgers" class="menu-display-space">
-            <button class="single option-bf" @click="identifyId('bf-sn-sandwitch',brkfstFood)">
+            <button class="double option-bf" @click="identifyId('bf-sn-sandwitch',brkfstFood)">
               <img src="../assets/sandwitch/sandwitch_sm.png" alt>
               <p>Sandwitch</p>
             </button>
@@ -44,7 +44,7 @@
               <img src="../assets/tomato/tomato_sm.png" alt="jitomate">
               <p>Jitomate</p>
             </button>
-            <button class="option-bf color-yellow" @click="identifyId('bf-ni-cheese',brkfstFood)">
+            <button class="option-bf color-white-yellow" @click="identifyId('bf-ni-cheese',brkfstFood)">
               <img src="../assets/cheese/cheese_sm.png" alt="queso">
               <p>Queso</p>
             </button>
@@ -52,11 +52,17 @@
 
           <h4>Bebidas</h4>
           <div class="beverages">
-            <button class="option-bf color-green" @click="identifyId('bf-dr-milky-coffee',brkfstFood)">
+            <button
+              class="option-bf color-green"
+              @click="identifyId('bf-dr-milky-coffee',brkfstFood)"
+            >
               <img src="../assets/milky_coffee/milky_coffee_sm.png" alt="mily-coffee">
               <p>Café lechero</p>
             </button>
-            <button class="option-bf color-green" @click="identifyId('bf-dr-dark-coffee',brkfstFood)">
+            <button
+              class="option-bf color-green"
+              @click="identifyId('bf-dr-dark-coffee',brkfstFood)"
+            >
               <img src="../assets/black_coffee/coffee_sm.png" alt="clack-coffee">
               <p>Café negro</p>
             </button>
@@ -133,12 +139,12 @@
           <input type="text" v-model="bfTickets.clientName">
           <table>
             <tr>
-              <th>#</th>
+              <!-- <th>#</th> -->
               <th>Item</th>
               <th>Costo</th>
             </tr>
             <tr v-for="(item,index) in pickedItems" v-bind:key="index" v-bind="bfTickets.order">
-              <td>{{ index }}</td>
+              <!-- <td>{{ index }}</td> -->
               <td>{{ item.name }}</td>
               <td>{{ item.price }}</td>
             </tr>
@@ -174,12 +180,12 @@
 
 <script>
 import { fb, db } from "../js/firebase";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 export default {
   name: "Breakfast",
-  data(){
-    return{
-       kindOfMenu: "Desayuno",
+  data() {
+    return {
+      kindOfMenu: "Desayuno",
       brkfstFood: [],
       pickedItems: [],
       bfButtons: document.getElementsByClassName("option-bf"),
@@ -192,9 +198,9 @@ export default {
         date: null,
         total: null
       }
-    }
+    };
   },
-   methods: {
+  methods: {
     saveDataOrder() {
       db.collection("bfTickets")
         .add(this.bfTickets)
@@ -221,9 +227,9 @@ export default {
       this.bfTickets.order = this.pickedItems;
       this.sumOfPrices(this.totalSum);
     },
-    deleteItemFn(index){
+    deleteItemFn(index) {
       this.pickedItems.splice(index, 1);
-      this.totalSum.splice(index,1);
+      this.totalSum.splice(index, 1);
       this.sumOfPrices(this.totalSum);
     },
     // deleteTicketFn(doc) {
@@ -298,7 +304,7 @@ export default {
         });
       });
   }
-}
+};
 </script>
 
 
@@ -329,6 +335,7 @@ h4 {
   width: 66%;
   margin-top: 2%;
   border-right: 2px solid white;
+  margin-bottom: 10%;
 }
 
 .logo-title {
