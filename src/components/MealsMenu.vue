@@ -145,13 +145,11 @@
       <div class="row text-size">
         <table>
           <tr>
-            <!-- <th>#</th> -->
             <th>Item</th>
             <th>Costo</th>
             <th>Opciones</th>
           </tr>
           <tr v-for="(item,index) in pickedItems" v-bind:key="index">
-            <!-- <td>{{ index }}</td> -->
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
             <td>
@@ -159,14 +157,13 @@
             </td>
           </tr>
           <tr>
-            <td></td>
             <td>Total</td>
             <td>{{ orderSum }}</td>
           </tr>
         </table>
       </div>
       <div class="order-confirm">
-        <button class="action-button color-white-green order-buttons">
+        <button class="action-button color-white-green order-buttons" @click="cancelOrder()">
           <p>Cancelar orden</p>
         </button>
         <button
@@ -196,8 +193,12 @@
               <td>{{ item.price }}</td>
             </tr>
             <tr>
-              <td>Total</td>
-              <td :v-bind="tickets.total">{{ orderSum }}</td>
+              <td>
+                <strong>Total</strong>
+              </td>
+              <td :v-bind="tickets.total">
+                <strong>{{ orderSum }}</strong>
+              </td>
             </tr>
           </table>
         </div>
@@ -284,35 +285,39 @@ export default {
       this.totalSum.splice(index, 1);
       this.sumOfPrices(this.totalSum);
     },
-    deleteTicketFn(doc) {
-      console.log("Hola, Pau <3");
-      Swal.fire({
-        title: "¿Estás segur@?",
-        text: "Esta acción no podrá ser revertida",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Estoy segur@"
-      }).then(result => {
-        if (result.value) {
-          console.log(doc);
-          Swal.fire(
-            "Listo!",
-            "El elemento ha sido borrado de la cuenta",
-            "success"
-          );
-        }
-      });
-    },
+    // deleteTicketFn(doc) {
+    //   console.log("Hola, Pau <3");
+    //   Swal.fire({
+    //     title: "¿Estás segur@?",
+    //     text: "Esta acción no podrá ser revertida",
+    //     type: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: "Estoy segur@"
+    //   }).then(result => {
+    //     if (result.value) {
+    //       console.log(doc);
+    //       Swal.fire(
+    //         "Listo!",
+    //         "El elemento ha sido borrado de la cuenta",
+    //         "success"
+    //       );
+    //     }
+    //   });
+    // },
     // función que ingresa el precio de cada objeto
     // en un arreglo para después sumarlo y obtener el total
     sumOfPrices(arr) {
-      console.log(arr);
       let sum = arr.reduce((a, b) => {
         return a + b;
       });
       this.orderSum = sum;
+    },
+    cancelOrder() {
+      this.pickedItems = [];
+      this.totalSum = [];
+      this.orderSum = 0;
     },
     getDate() {
       this.today = new Date();
@@ -378,13 +383,17 @@ h4 {
   color: white;
 }
 
+strong {
+  font-weight: 700;
+}
+
 .main-container {
   display: flex;
   background-color: #242e3a;
   width: 100%;
   height: 0 auto;
   margin-top: -6%;
-  /* height: -webkit-fill-available; */
+  padding-bottom: 0%;
 }
 
 .items-container {
@@ -505,7 +514,7 @@ h4 {
 
 .modal {
   color: #242e3a;
-  font-size: 1em;
+  font-size: 2em;
 }
 
 .modal-footer {

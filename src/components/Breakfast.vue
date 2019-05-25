@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="main-container">
     <div class="items-container">
       <div class="logo-title row">
         <img
@@ -44,7 +44,10 @@
               <img src="../assets/tomato/tomato_sm.png" alt="jitomate">
               <p>Jitomate</p>
             </button>
-            <button class="option-bf color-white-yellow" @click="identifyId('bf-ni-cheese',brkfstFood)">
+            <button
+              class="option-bf color-white-yellow"
+              @click="identifyId('bf-ni-cheese',brkfstFood)"
+            >
               <img src="../assets/cheese/cheese_sm.png" alt="queso">
               <p>Queso</p>
             </button>
@@ -116,7 +119,7 @@
         </table>
       </div>
       <div class="order-confirm">
-        <button class="action-button color-white-green order-buttons">
+        <button class="action-button color-white-green order-buttons" @click="cancelOrder()">
           <p>Cancelar orden</p>
         </button>
         <button
@@ -139,19 +142,20 @@
           <input type="text" v-model="bfTickets.clientName">
           <table>
             <tr>
-              <!-- <th>#</th> -->
               <th>Item</th>
               <th>Costo</th>
             </tr>
             <tr v-for="(item,index) in pickedItems" v-bind:key="index" v-bind="bfTickets.order">
-              <!-- <td>{{ index }}</td> -->
               <td>{{ item.name }}</td>
               <td>{{ item.price }}</td>
             </tr>
             <tr>
-              <td></td>
-              <td>Total</td>
-              <td :v-bind="bfTickets.total">{{ orderSum }}</td>
+              <td>
+                <strong>Total</strong>
+              </td>
+              <td :v-bind="bfTickets.total">
+                <strong>{{ orderSum }}</strong>
+              </td>
             </tr>
           </table>
         </div>
@@ -205,7 +209,10 @@ export default {
       db.collection("bfTickets")
         .add(this.bfTickets)
         .then(docRef => {
-          console.log("Document written with ID: ", docRef.id);
+          alert(
+            "Tu pedido ha sido enviado a cocina con el siguiente identificador: " +
+              docRef.id
+          );
           this.reset();
         })
         .catch(function(error) {
@@ -219,7 +226,6 @@ export default {
     identifyId(id, data) {
       for (const item of data) {
         if (id === item.id) {
-          console.log(item);
           this.pickedItems.push(item);
           this.totalSum.push(item.price);
         }
@@ -232,30 +238,16 @@ export default {
       this.totalSum.splice(index, 1);
       this.sumOfPrices(this.totalSum);
     },
-    // deleteTicketFn(doc) {
-    //   // console.log("Hola, Pau <3");
-    //   Swal.fire({
-    //     title: "¿Estás segur@?",
-    //     text: "Esta acción no podrá ser revertida",
-    //     type: "warning",
-    //     showCancelButton: true,
-    //     confirmButtonColor: "#3085d6",
-    //     cancelButtonColor: "#d33",
-    //     confirmButtonText: "Estoy segur@"
-    //   }).then(result => {
-    //     if (result.value) {
-    //       console.log(doc);
-    //       Swal.fire("Listo!", "El elemento ha sido borrado de la cuenta", "success");
-    //     }
-    //   });
-    // },
-    // función que ingresa el precio de cada objeto
-    // en un arreglo para después sumarlo y obtener el total
     sumOfPrices(arr) {
       let sum = arr.reduce((a, b) => {
         return a + b;
       });
       this.orderSum = sum;
+    },
+    cancelOrder() {
+      this.pickedItems = [];
+      this.totalSum = [];
+      this.orderSum = 0;
     },
     getDate() {
       this.today = new Date();
@@ -323,12 +315,18 @@ h4 {
   color: white;
 }
 
-.container {
+strong {
+  font-weight: 700;
+}
+
+.main-container {
   display: flex;
   background-color: #242e3a;
   width: 100%;
   height: 0 auto;
   margin-top: -6%;
+  /* height: -webkit-fill-available; */
+  padding-bottom: 0%;
 }
 
 .items-container {
@@ -336,6 +334,7 @@ h4 {
   margin-top: 2%;
   border-right: 2px solid white;
   margin-bottom: 10%;
+  height: -webkit-fill-available;
 }
 
 .logo-title {
@@ -363,6 +362,7 @@ h4 {
   background-color: #38404a;
   color: white;
   margin-bottom: 0%;
+  padding-bottom: 43%;
 }
 
 .menu-options {
@@ -450,6 +450,7 @@ h4 {
 
 .modal {
   color: #242e3a;
+  font-size: 2em;
 }
 
 .modal-footer {
