@@ -113,7 +113,7 @@ export default {
   name: "BreakfastMenu",
   data() {
     return {
-      kindOfMenu: "Desayuno"
+      kindOfMenu: "Comida"
     };
   }
 };

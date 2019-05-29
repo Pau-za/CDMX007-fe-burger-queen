@@ -13,11 +13,11 @@
       <br>
       <div class="options-items-food">
         <div class="meals-selected">
-          <h4>Sandwitch</h4>
+          <h4>Sandwich</h4>
           <div id="single-burgers" class="menu-display-space">
             <button class="double option-bf" @click="identifyId('bf-sn-sandwitch',brkfstFood)">
               <img src="../assets/sandwitch/sandwitch_sm.png" alt>
-              <p>Sandwitch</p>
+              <p>Sandwich</p>
             </button>
           </div>
 
@@ -221,7 +221,15 @@ export default {
     },
     // Esta función es para que borre los inputs, pero en esta interfaz no sé si utilizaré alguno
     reset() {
-      Object.assign(this.$data, this.$options.data.apply(this));
+      // Object.assign(this.$data, this.$options.data.apply(this));
+      this.pickedItems = [];
+      this.totalSum = [0];
+      this.orderSum = 0;
+      this.today = "";
+      this.bfTickets.clientName= null;
+      this.bfTickets.total= 0;
+      this.bfTickets.order= null;
+      this.bfTickets.date= null;
     },
     identifyId(id, data) {
       for (const item of data) {

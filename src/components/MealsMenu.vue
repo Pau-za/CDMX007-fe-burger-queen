@@ -152,9 +152,9 @@
           <tr v-for="(item,index) in pickedItems" v-bind:key="index">
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
-            <td>
+            <!-- <td>
               <i class="far fa-trash-alt" @click="deleteItemFn(index)"></i>
-            </td>
+            </td> -->
           </tr>
           <tr>
             <td>Total</td>
@@ -268,9 +268,18 @@ export default {
     },
     // Esta función es para que borre los inputs, pero en esta interfaz no sé si utilizaré alguno
     reset() {
-      Object.assign(this.$data, this.$options.data.call(this));
+      // Object.assign(this.$data, this.$options.data.call(this));
+      this.pickedItems = [];
+      this.totalSum = [0];
+      this.orderSum = 0;
+      this.today = "";
+      this.tickets.clientName= null;
+      this.tickets.total= 0;
+      this.tickets.order= null;
+      this.tickets.date= null;
     },
     identifyId(id, data) {
+      console.log(data);
       for (const item of data) {
         if (id === item.id) {
           this.pickedItems.push(item);

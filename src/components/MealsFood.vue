@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: "mealsFood"
+  name: "MealsFood"
 };
 </script>
 
