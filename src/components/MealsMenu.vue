@@ -13,66 +13,113 @@
       <br>
       <div class="options-items-food">
         <div class="meals-selected">
-          <h4>Sandwich</h4>
+          <h4>Hamburguesas</h4>
           <div id="single-burgers" class="menu-display-space">
-            <button class="double option-bf" @click="identifyId('bf-sn-sandwitch',brkfstFood)">
-              <img src="../assets/sandwitch/sandwitch_sm.png" alt>
-              <p>Sandwich</p>
+            <button class="single option-meal" @click="identifyId('ml-sh-single-beef',mealsFood)">
+              <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+              <p>Sencilla Res</p>
+            </button>
+            <button
+              class="single option-meal"
+              @click="identifyId('ml-sh-single-chicken',mealsFood)"
+            >
+              <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+              <p>Sencilla Pollo</p>
+            </button>
+            <button class="single option-meal" @click="identifyId('ml-sh-single-veggie',mealsFood)">
+              <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+              <p>Sencilla Veggie</p>
+            </button>
+          </div>
+
+          <div id="double-burgers" class="menu-display-space">
+            <button class="double option-meal" @click="identifyId('ml-dh-double-beef',mealsFood)">
+              <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+              <p>Doble Res</p>
+            </button>
+            <button
+              class="double option-meal"
+              @click="identifyId('ml-dh-double-chicken',mealsFood)"
+            >
+              <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+              <p>Doble Pollo</p>
+            </button>
+            <button class="double option-meal" @click="identifyId('ml-dh-double-veggie',mealsFood)">
+              <img src="../assets/hamburguesas/single-hamburguesa-sm.png" alt>
+              <p>Doble Veggie</p>
             </button>
           </div>
 
           <h4>Sin ingredientes</h4>
           <div class="no-ingredients">
             <button
-              class="option-bf color-white-yellow"
-              @click="identifyId('bf-ex-onion',brkfstFood)"
+              class="option-meal color-white-yellow"
+              @click="identifyId('ml-ni-onion',mealsFood)"
             >
               <img src="../assets/onion/onion_sm.png" alt="cebolla">
               <p>Cebolla</p>
             </button>
             <button
-              class="option-bf color-white-yellow"
-              @click="identifyId('bf-ni-lettuce',brkfstFood)"
+              class="option-meal color-white-yellow"
+              @click="identifyId('ml-ni-lettuce',mealsFood)"
             >
               <img src="../assets/lettuce/lettuce_sm.png" alt="lechuga">
               <p>Lechuga</p>
             </button>
             <button
-              class="option-bf color-white-yellow"
-              @click="identifyId('bf-ni-tomato',brkfstFood)"
+              class="option-meal color-white-yellow"
+              @click="identifyId('ml-ni-tomato',mealsFood)"
             >
               <img src="../assets/tomato/tomato_sm.png" alt="jitomate">
               <p>Jitomate</p>
             </button>
             <button
-              class="option-bf color-white-yellow"
-              @click="identifyId('bf-ni-cheese',brkfstFood)"
+              class="option-meal color-white-yellow"
+              @click="identifyId('ml-ni-pickles',mealsFood)"
             >
+              <img src="../assets/pickles/pickles_sm.png" alt="pepinillos">
+              <p>Pepinillos</p>
+            </button>
+          </div>
+
+          <h4>Ingredientes extras</h4>
+          <div class="extras">
+            <button class="option-meal color-yellow" @click="identifyId('ml-ex-cheese',mealsFood)">
               <img src="../assets/cheese/cheese_sm.png" alt="queso">
               <p>Queso</p>
+            </button>
+            <button class="option-meal color-yellow" @click="identifyId('ml-ex-egg',mealsFood)">
+              <img src="../assets/egg/egg_sm.png" alt="huevo">
+              <p>Huevo</p>
             </button>
           </div>
 
           <h4>Bebidas</h4>
           <div class="beverages">
-            <button
-              class="option-bf color-green"
-              @click="identifyId('bf-dr-milky-coffee',brkfstFood)"
+            <button class="option-meal color-green" @click="identifyId('ml-dr-water',mealsFood)">
+              <img src="../assets/water/water_bottle_sm.png" alt="agua">
+              <p>Agua</p>
+            </button>
+            <button class="option-meal color-green" @click="identifyId('ml-dr-soda',mealsFood)">
+              <img src="../assets/soda/soda_sm.png" alt="refresco">
+              <p>Refresco</p>
+            </button>
+          </div>
+
+          <h4>Guarniciones</h4>
+          <div class="garrison">
+            <button class="option-meal color-pink" @click="identifyId('ml-gr-fries',mealsFood)">
+              <img src="../assets/fries/fries_sm.png" alt="papas">
+              <p>Papas fritas</p>
+            </button>
+            <!-- En este momento este botón está generando problemas, lo comentaré en lo que descubro cuál es -->
+            <!-- <button
+              class="option-meal color-pink"
+              @click="identifyId('ml-gr-rings',mealsFood)"
             >
-              <img src="../assets/milky_coffee/milky_coffee_sm.png" alt="mily-coffee">
-              <p>Café lechero</p>
-            </button>
-            <button
-              class="option-bf color-green"
-              @click="identifyId('bf-dr-dark-coffee',brkfstFood)"
-            >
-              <img src="../assets/black_coffee/coffee_sm.png" alt="clack-coffee">
-              <p>Café negro</p>
-            </button>
-            <button class="option-bf color-green" @click="identifyId('bf-dr-juice',brkfstFood)">
-              <img src="../assets/orange_juice/orange_juice_sm.png" alt="juice">
-              <p>Jugo</p>
-            </button>
+              <img src="../assets/onion_rings/onion_rings_sm.png" alt="aros">
+              <p>Aros de cebolla</p>
+            </button>-->
           </div>
         </div>
       </div>
@@ -98,21 +145,18 @@
       <div class="row text-size">
         <table>
           <tr>
-            <!-- <th>#</th> -->
             <th>Item</th>
             <th>Costo</th>
             <th>Opciones</th>
           </tr>
           <tr v-for="(item,index) in pickedItems" v-bind:key="index">
-            <!-- <td>{{ index }}</td> -->
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
-            <td>
+            <!-- <td>
               <i class="far fa-trash-alt" @click="deleteItemFn(index)"></i>
-            </td>
+            </td> -->
           </tr>
           <tr>
-            <!-- <td></td> -->
             <td>Total</td>
             <td>{{ orderSum }}</td>
           </tr>
@@ -128,8 +172,7 @@
           @click="modalFn();getDate();toPay()"
         >
           <p>
-            Generar Ticket
-            <!-- <router-link to="/MealsMenu">Generar Ticket</router-link> -->
+            <router-link to="/MealsMenu">Generar Ticket</router-link>
           </p>
         </button>
       </div>
@@ -139,13 +182,13 @@
           <h5>Ticket Orden</h5>
           <p>Fecha: {{ today }}</p>
           <h5>Nombre del Cliente:</h5>
-          <input type="text" v-model="bfTickets.clientName">
+          <input type="text" v-model="tickets.clientName">
           <table>
             <tr>
               <th>Item</th>
               <th>Costo</th>
             </tr>
-            <tr v-for="(item,index) in pickedItems" v-bind:key="index" v-bind="bfTickets.order">
+            <tr v-for="(item,index) in pickedItems" v-bind:key="index" v-bind="tickets.order">
               <td>{{ item.name }}</td>
               <td>{{ item.price }}</td>
             </tr>
@@ -153,7 +196,7 @@
               <td>
                 <strong>Total</strong>
               </td>
-              <td :v-bind="bfTickets.total">
+              <td :v-bind="tickets.total">
                 <strong>{{ orderSum }}</strong>
               </td>
             </tr>
@@ -186,17 +229,17 @@
 import { fb, db } from "../js/firebase";
 import Swal from "sweetalert2";
 export default {
-  name: "Breakfast",
+  name: "MealsMenu",
   data() {
     return {
-      kindOfMenu: "Desayuno",
-      brkfstFood: [],
+      kindOfMenu: "Comida",
+      mealsFood: [],
       pickedItems: [],
-      bfButtons: document.getElementsByClassName("option-bf"),
+      mealButtons: document.getElementsByClassName("option-meal"),
       totalSum: [],
       orderSum: 0,
       today: "",
-      bfTickets: {
+      tickets: {
         clientName: null,
         order: null,
         date: null,
@@ -206,8 +249,8 @@ export default {
   },
   methods: {
     saveDataOrder() {
-      db.collection("bfTickets")
-        .add(this.bfTickets)
+      db.collection("tickets")
+        .add(this.tickets)
         .then(docRef => {
           alert(
             "Tu pedido ha sido enviado a cocina con el siguiente identificador: " +
@@ -216,29 +259,34 @@ export default {
           this.reset();
         })
         .catch(function(error) {
-          console.error("Error adding document: ", error);
+          if (error) {
+            console.log(
+              "Se produjo el siguiente error al enviar la orden: " + error
+            );
+          }
         });
     },
     // Esta función es para que borre los inputs, pero en esta interfaz no sé si utilizaré alguno
     reset() {
-      // Object.assign(this.$data, this.$options.data.apply(this));
+      // Object.assign(this.$data, this.$options.data.call(this));
       this.pickedItems = [];
       this.totalSum = [0];
       this.orderSum = 0;
       this.today = "";
-      this.bfTickets.clientName= null;
-      this.bfTickets.total= 0;
-      this.bfTickets.order= null;
-      this.bfTickets.date= null;
+      this.tickets.clientName= null;
+      this.tickets.total= 0;
+      this.tickets.order= null;
+      this.tickets.date= null;
     },
     identifyId(id, data) {
+      console.log(data);
       for (const item of data) {
         if (id === item.id) {
           this.pickedItems.push(item);
           this.totalSum.push(item.price);
         }
       }
-      this.bfTickets.order = this.pickedItems;
+      this.tickets.order = this.pickedItems;
       this.sumOfPrices(this.totalSum);
     },
     deleteItemFn(index) {
@@ -246,6 +294,29 @@ export default {
       this.totalSum.splice(index, 1);
       this.sumOfPrices(this.totalSum);
     },
+    // deleteTicketFn(doc) {
+    //   console.log("Hola, Pau <3");
+    //   Swal.fire({
+    //     title: "¿Estás segur@?",
+    //     text: "Esta acción no podrá ser revertida",
+    //     type: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: "Estoy segur@"
+    //   }).then(result => {
+    //     if (result.value) {
+    //       console.log(doc);
+    //       Swal.fire(
+    //         "Listo!",
+    //         "El elemento ha sido borrado de la cuenta",
+    //         "success"
+    //       );
+    //     }
+    //   });
+    // },
+    // función que ingresa el precio de cada objeto
+    // en un arreglo para después sumarlo y obtener el total
     sumOfPrices(arr) {
       let sum = arr.reduce((a, b) => {
         return a + b;
@@ -283,7 +354,7 @@ export default {
         minutes +
         ":" +
         sec;
-      this.bfTickets.date = this.today;
+      this.tickets.date = this.today;
     },
     modalFn() {
       const elems = document.querySelectorAll(".modal");
@@ -296,18 +367,16 @@ export default {
     }
   },
   created() {
-    db.collection("breakfastItems")
+    db.collection("foodItems")
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          this.brkfstFood.push(doc.data());
+          this.mealsFood.push(doc.data());
         });
       });
   }
 };
 </script>
-
-
 
 <style scoped>
 p {
@@ -333,7 +402,6 @@ strong {
   width: 100%;
   height: 0 auto;
   margin-top: -6%;
-  /* height: -webkit-fill-available; */
   padding-bottom: 0%;
 }
 
@@ -341,8 +409,6 @@ strong {
   width: 66%;
   margin-top: 2%;
   border-right: 2px solid white;
-  margin-bottom: 10%;
-  height: -webkit-fill-available;
 }
 
 .logo-title {
@@ -370,7 +436,6 @@ strong {
   background-color: #38404a;
   color: white;
   margin-bottom: 0%;
-  padding-bottom: 43%;
 }
 
 .menu-options {
@@ -392,7 +457,7 @@ strong {
   margin-bottom: 2%;
 }
 
-.option-bf,
+.option-meal,
 .action-button {
   justify-content: space-evenly;
   border-radius: 10%;
