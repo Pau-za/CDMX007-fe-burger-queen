@@ -5,7 +5,7 @@
         <img
           class="col m-6"
           id="sm-burger-logo"
-          src="../assets/logo_burquerqueen/logo_burguer_sm.png"
+          src="../assets/logo_burquerqueen/logo_burguer.png"
           alt="logo-burgerqueen"
         >
         <h2 class="col m-6" id="kind-of-menu">{{ kindOfMenu }}</h2>
@@ -152,9 +152,9 @@
           <tr v-for="(item,index) in pickedItems" v-bind:key="index">
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
-            <!-- <td>
+            <td>
               <i class="far fa-trash-alt" @click="deleteItemFn(index)"></i>
-            </td> -->
+            </td>
           </tr>
           <tr>
             <td>Total</td>

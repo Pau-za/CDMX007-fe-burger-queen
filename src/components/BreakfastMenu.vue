@@ -5,7 +5,7 @@
         <img
           class="col m-6"
           id="sm-burger-logo"
-          src="../assets/logo_burquerqueen/logo_burguer_sm.png"
+          src="../assets/logo_burquerqueen/logo_burguer.png"
           alt="logo-burgerqueen"
         >
         <h4 class="col m-6" id="kind-of-menu">{{ kindOfMenu }}</h4>
